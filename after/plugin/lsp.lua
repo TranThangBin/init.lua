@@ -12,8 +12,11 @@ lsp.ensure_installed({
 	"jsonls",
 	"bashls",
 	"clangd",
-	"csharp_ls",
 	"emmet_language_server",
+	"omnisharp",
+	"ltex",
+	"lua_ls",
+	"sqlls",
 })
 
 local cmp = require("cmp")

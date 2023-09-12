@@ -34,7 +34,7 @@ return require("packer").startup(function(use)
 			{ "williamboman/mason.nvim" }, -- Optional
 			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
 			{ "jose-elias-alvarez/null-ls.nvim" },
-			{ "jay-babu/mason-null-ls.nvim" },
+			{ "jay-babu/mason-null-ls.nvim" }, -- Ensure installed formatter
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" }, -- Required
@@ -76,4 +76,5 @@ return require("packer").startup(function(use)
 		},
 	})
 	use("windwp/nvim-ts-autotag")
+	--[[ use({ "Issafalcon/lsp-overloads.nvim" }) ]]
 end)

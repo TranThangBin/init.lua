@@ -31,7 +31,13 @@ nvim_tree.setup({
 		local api = require("nvim-tree.api")
 
 		local function opts(desc)
-			return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+			return {
+				desc = "nvim-tree: " .. desc,
+				buffer = bufnr,
+				noremap = true,
+				silent = true,
+				nowait = true,
+			}
 		end
 
 		-- default mappings
@@ -39,7 +45,7 @@ nvim_tree.setup({
 
 		-- custom mappings
 		vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent, opts("Up"))
-		vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+		vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
 	end,
 	---
 	sort_by = "case_sensitive",

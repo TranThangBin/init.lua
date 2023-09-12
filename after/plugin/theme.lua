@@ -1,9 +1,9 @@
 local themes = {
+	"rose-pine",
 	"tokyonight-night",
 	"tokyonight-storm",
 	"tokyonight-day",
 	"tokyonight-moon",
-	"rose-pine",
 }
 
 function SetTheme(themeIndex)
