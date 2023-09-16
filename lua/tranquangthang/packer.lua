@@ -76,5 +76,5 @@ return require("packer").startup(function(use)
 		},
 	})
 	use("windwp/nvim-ts-autotag")
-	--[[ use({ "Issafalcon/lsp-overloads.nvim" }) ]]
+	use({ "Issafalcon/lsp-overloads.nvim" })
 end)
