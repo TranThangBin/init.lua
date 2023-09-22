@@ -77,4 +77,8 @@ return require("packer").startup(function(use)
 	})
 	use("windwp/nvim-ts-autotag")
 	use({ "Issafalcon/lsp-overloads.nvim" })
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+	})
 end)
