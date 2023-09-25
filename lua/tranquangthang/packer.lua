@@ -70,7 +70,10 @@ return require("packer").startup(function(use)
 	use({ "Issafalcon/lsp-overloads.nvim" })
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+		requires = { "nvim-tree/nvim-web-devicons" },
 	})
 	use({ "ggandor/leap.nvim" })
+	use({
+		"prichrd/netrw.nvim",
+	})
 end)
