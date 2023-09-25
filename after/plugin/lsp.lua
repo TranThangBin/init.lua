@@ -77,7 +77,6 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("i", "<C-h>", function()
 		vim.lsp.buf.signature_help()
 	end, opts)
-	--- Guard against servers without the signatureHelper capability
 	if client.server_capabilities.signatureHelpProvider then
 		require("lsp-overloads").setup(client, {
 			-- UI options are mostly the same as those passed to vim.lsp.util.open_floating_preview

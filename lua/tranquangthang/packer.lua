@@ -65,15 +65,6 @@ return require("packer").startup(function(use)
 	use({ "jiangmiao/auto-pairs" })
 	use({
 		"gelguy/wilder.nvim",
-		config = function()
-			-- config goes here
-		end,
-	})
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional
-		},
 	})
 	use("windwp/nvim-ts-autotag")
 	use({ "Issafalcon/lsp-overloads.nvim" })
@@ -81,4 +72,5 @@ return require("packer").startup(function(use)
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	})
+	use({ "ggandor/leap.nvim" })
 end)
