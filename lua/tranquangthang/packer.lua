@@ -15,10 +15,7 @@ return require("packer").startup(function(use)
 	use({
 		"rose-pine/neovim",
 		as = "rose-pine",
-		tag = "v0.1.0", -- Optional tag release
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
+		-- tag = "v0.1.0", -- Optional tag release
 	})
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/playground")
@@ -58,11 +55,7 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
 	})
-	use({ "jiangmiao/auto-pairs" })
 	use({
 		"gelguy/wilder.nvim",
 	})
@@ -76,4 +69,5 @@ return require("packer").startup(function(use)
 	use({
 		"prichrd/netrw.nvim",
 	})
+	use("heaths/vim-msbuild")
 end)

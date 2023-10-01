@@ -16,7 +16,7 @@ formatter.setup({
 	-- Set the log level
 	log_level = vim.log.levels.WARN,
 	filetype = {
-		lua = {
+		["lua"] = {
 			function()
 				-- stylua
 				return {
@@ -32,7 +32,7 @@ formatter.setup({
 				}
 			end,
 		},
-		cs = {
+		["cs"] = {
 			function()
 				-- csharpier
 				return {
@@ -45,10 +45,10 @@ formatter.setup({
 		["*"] = {
 			-- prettierd
 			function()
-				local current_file = vim.api.nvim_buf_get_name(0)
-				if current_file:match("%.gitignore$") or current_file:match("%.md$") then
-					return nil
-				end
+				-- local current_file = vim.api.nvim_buf_get_name(0)
+				-- if current_file:match("%.gitignore$") or current_file:match("%.md$") then
+				-- 	return nil
+				-- end
 				return {
 					exe = "prettierd",
 					args = { vim.api.nvim_buf_get_name(0) },

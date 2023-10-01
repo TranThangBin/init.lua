@@ -1,4 +1,5 @@
 local lsp = require("lsp-zero")
+local lsp_overloads = require("lsp-overloads")
 
 lsp.preset("recommended")
 
@@ -24,9 +25,9 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_action = lsp.cmp_action()
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
-	["Enter"] = cmp.mapping.confirm({ select = true }),
+	["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+	["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
+	["<Tab>"] = cmp.mapping.confirm({ select = true }),
 	["<C-n>"] = cmp_action.toggle_completion(),
 })
 
@@ -78,7 +79,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.signature_help()
 	end, opts)
 	if client.server_capabilities.signatureHelpProvider then
-		require("lsp-overloads").setup(client, {
+		lsp_overloads.setup(client, {
 			-- UI options are mostly the same as those passed to vim.lsp.util.open_floating_preview
 			ui = {
 				border = "single", -- The border to use for the signature popup window. Accepts same border values as |nvim_open_win()|.
@@ -115,3 +116,6 @@ lsp.setup()
 vim.diagnostic.config({
 	virtual_text = true,
 })
+vim.keymap.set("n", "<leader>di", function()
+	vim.diagnostic.open_float(0, { scope = "line" })
+end)

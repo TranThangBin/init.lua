@@ -1,11 +1,9 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>fe", vim.cmd.Ex)
 
-vim.keymap.set("n", "<leader>y", '"+y$')
-vim.keymap.set("x", "<leader>y", '"+y')
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y$')
 
-vim.keymap.set("s", "jj", "<Esc>")
-vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set({ "s", "i" }, "jj", "<Esc>")
 
 vim.keymap.set("x", "<leader>p", '"_dP')
 
