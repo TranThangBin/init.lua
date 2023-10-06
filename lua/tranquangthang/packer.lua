@@ -24,13 +24,13 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
+		branch = "v3.x",
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
 			{ "williamboman/mason.nvim" }, -- Optional
 			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-			{ "jose-elias-alvarez/null-ls.nvim" },
+			{ "jose-elias-alvarez/null-ls.nvim" }, -- dependency of mason-null-ls
 			{ "jay-babu/mason-null-ls.nvim" }, -- Ensure installed formatter
 
 			-- Autocompletion
@@ -60,7 +60,7 @@ return require("packer").startup(function(use)
 		"gelguy/wilder.nvim",
 	})
 	use("windwp/nvim-ts-autotag")
-	use({ "Issafalcon/lsp-overloads.nvim" })
+	use("Issafalcon/lsp-overloads.nvim")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons" },
@@ -69,5 +69,4 @@ return require("packer").startup(function(use)
 	use({
 		"prichrd/netrw.nvim",
 	})
-	use("heaths/vim-msbuild")
 end)
