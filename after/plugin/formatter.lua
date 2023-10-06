@@ -35,9 +35,16 @@ formatter.setup({
 		["cs"] = {
 			function()
 				-- csharpier
+				-- if vim.opt.fileformat ~= "unix" then
+				-- 	vim.opt.fileformat = "unix"
+				-- end
 				return {
 					exe = "dotnet-csharpier",
-					args = { "--write-stdout", vim.api.nvim_buf_get_name(0) },
+					args = {
+						"--write-stdout",
+						"--check",
+						vim.api.nvim_buf_get_name(0),
+					},
 					stdin = true,
 				}
 			end,
@@ -45,10 +52,13 @@ formatter.setup({
 		["*"] = {
 			-- prettierd
 			function()
-				-- local current_file = vim.api.nvim_buf_get_name(0)
-				-- if current_file:match("%.gitignore$") or current_file:match("%.md$") then
-				-- 	return nil
-				-- end
+				local current_file = vim.api.nvim_buf_get_name(0)
+				local is_gitignore = current_file:match("%.gitignore$")
+				local is_markdown = current_file:match("%.md$")
+				local is_ignored_files = is_gitignore or is_markdown
+				if is_ignored_files then
+					return nil
+				end
 				return {
 					exe = "prettierd",
 					args = { vim.api.nvim_buf_get_name(0) },
@@ -60,4 +70,17 @@ formatter.setup({
 	},
 })
 
-vim.cmd("autocmd BufWritePost * FormatWrite")
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.cs",
+	callback = function()
+		if vim.opt.fileformat ~= "unix" then
+			vim.opt.fileformat = "unix"
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	callback = function()
+		vim.cmd("FormatWrite")
+	end,
+})
