@@ -1,14 +1,11 @@
 local lsp_config = require("lspconfig")
 local lsp_zero = require("lsp-zero")
-local lsp_overloads = require("lsp-overloads")
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 
 lsp_zero.preset("recommended")
 
-mason.setup({})
+require("mason").setup({})
 
-mason_lspconfig.setup({
+require("mason-lspconfig").setup({
 	ensure_installed = {
 		"tsserver",
 		"eslint",
@@ -23,6 +20,9 @@ mason_lspconfig.setup({
 		"lua_ls",
 		"sqlls",
 		"html",
+		"gopls",
+		"dockerls",
+		"docker_compose_language_service",
 	},
 	handlers = {
 		lsp_zero.default_setup,
@@ -36,9 +36,7 @@ mason_lspconfig.setup({
 
 local cmp = require("cmp")
 local cmp_action = lsp_zero.cmp_action()
-local cmp_format = lsp_zero.cmp_format()
-local luasnip_vscode = require("luasnip.loaders.from_vscode")
-luasnip_vscode.lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load()
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 cmp.setup({
@@ -51,15 +49,15 @@ cmp.setup({
 		["<C-n>"] = cmp_action.toggle_completion(),
 
 		-- tab complete
-		["<C-j>"] = cmp_action.tab_complete(),
+		["<C-j>"] = cmp.mapping.select_next_item(),
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 
 		-- navigate between snippet placeholder
-		-- ["<C-d>"] = cmp_action.luasnip_jump_forward(),
-		-- ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+		["<C-d>"] = cmp_action.luasnip_jump_forward(),
+		["<C-b>"] = cmp_action.luasnip_jump_backward(),
 
 		-- scroll documentation window
-		-- ["<C-f>"] = cmp.mapping.scroll_docs(-5),
+		["<C-f>"] = cmp.mapping.scroll_docs(-5),
 		-- ["<C-d>"] = cmp.mapping.scroll_docs(5),
 	}),
 	sources = {
@@ -73,11 +71,11 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	preselect = cmp.PreselectMode.None,
+	preselect = "item",
 	completion = {
 		completeopt = "menu,menuone,noinsert",
 	},
-	formatting = cmp_format,
+	formatting = lsp_zero.cmp_format(),
 })
 
 lsp_zero.set_preferences({
@@ -102,7 +100,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 	if client.server_capabilities.signatureHelpProvider then
-		lsp_overloads.setup(client, {
+		require("lsp-overloads").setup(client, {
 			-- UI options are mostly the same as those passed to vim.lsp_zero.util.open_floating_preview
 			ui = {
 				border = "single", -- The border to use for the signature popup window. Accepts same border values as |nvim_open_win()|.
@@ -131,13 +129,14 @@ lsp_zero.on_attach(function(client, bufnr)
 			},
 			display_automatically = true, -- Uses trigger characters to automatically display the signature overloads when typing a method signature
 		})
+		vim.keymap.set({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature)
 	end
 end)
 
 lsp_zero.setup()
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 	severity_sort = true,
 	float = {
 		style = "minimal",
@@ -147,7 +146,6 @@ vim.diagnostic.config({
 		prefix = "",
 	},
 })
-vim.keymap.set("n", "<leader>di", function()
+vim.keymap.set("n", "<A-d>", function()
 	vim.diagnostic.open_float(0, { scope = "line" })
 end)
-vim.keymap.set("n", "<leader>do", vim.cmd.LspOverloadsSignature)

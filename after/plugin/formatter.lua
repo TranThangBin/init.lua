@@ -1,16 +1,4 @@
-local formatter = require("formatter")
-local mason_null_ls = require("mason-null-ls")
-
-mason_null_ls.setup({
-	-- ensure installed with mason-null-ls
-	ensure_installed = {
-		"stylua",
-		"prettierd",
-		"csharpier",
-	},
-})
-
-formatter.setup({
+require("formatter").setup({
 	-- Enable or disable logging
 	logging = true,
 	-- Set the log level
@@ -35,14 +23,27 @@ formatter.setup({
 		["cs"] = {
 			function()
 				-- csharpier
-				-- if vim.opt.fileformat ~= "unix" then
-				-- 	vim.opt.fileformat = "unix"
-				-- end
 				return {
 					exe = "dotnet-csharpier",
 					args = {
 						"--write-stdout",
 						"--check",
+						vim.api.nvim_buf_get_name(0),
+					},
+					stdin = true,
+				}
+			end,
+		},
+		["go"] = {
+			function()
+				return {
+					exe = "goimports-reviser",
+					args = {
+						-- "-rm-unused",
+						"-set-alias",
+						"-format",
+						"-output",
+						"stdout",
 						vim.api.nvim_buf_get_name(0),
 					},
 					stdin = true,

@@ -46,27 +46,24 @@ return require("packer").startup(function(use)
 			{ "rafamadriz/friendly-snippets" }, -- Optional
 		},
 	})
-	use({ "mhartington/formatter.nvim" })
+	use("mhartington/formatter.nvim")
 	use({
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {},
 	})
-	use({
-		"numToStr/Comment.nvim",
-	})
-	use({
-		"gelguy/wilder.nvim",
-	})
+	use("numToStr/Comment.nvim")
+	use("gelguy/wilder.nvim")
 	use("windwp/nvim-ts-autotag")
 	use("Issafalcon/lsp-overloads.nvim")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons" },
 	})
-	use({ "ggandor/leap.nvim" })
+	use("prichrd/netrw.nvim")
 	use({
-		"prichrd/netrw.nvim",
+		"LunarWatcher/auto-pairs",
+		branch = "develop",
 	})
 end)

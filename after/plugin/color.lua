@@ -1,6 +1,4 @@
-local rose_pine = require("rose-pine")
-
-rose_pine.setup({
+require("rose-pine").setup({
 	--- @usage 'auto'|'main'|'moon'|'dawn'
 	variant = "auto",
 	--- @usage 'main'|'moon'|'dawn'

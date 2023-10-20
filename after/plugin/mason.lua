@@ -1,6 +1,14 @@
-local mason = require("mason")
+require("mason-null-ls").setup({
+	-- ensure installed with mason-null-ls
+	ensure_installed = {
+		"stylua",
+		"prettierd",
+		"csharpier",
+		"goimports-reviser",
+	},
+})
 
-mason.setup({
+require("mason").setup({
 	ui = {
 		icons = {
 			package_installed = "✓",

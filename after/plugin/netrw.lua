@@ -1,6 +1,4 @@
-local netrw = require("netrw")
-
-netrw.setup({
+require("netrw").setup({
 	-- Put your configuration here, or leave the object empty to take the default
 	-- configuration.
 	icons = {
