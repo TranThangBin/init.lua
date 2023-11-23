@@ -1,3 +1,5 @@
+local util = require("formatter.util")
+
 require("formatter").setup({
 	-- Enable or disable logging
 	logging = true,
@@ -5,20 +7,10 @@ require("formatter").setup({
 	log_level = vim.log.levels.WARN,
 	filetype = {
 		["lua"] = {
-			function()
-				-- stylua
-				return {
-					exe = "stylua",
-					args = {
-						"--search-parent-directories",
-						"--stdin-filepath",
-						vim.api.nvim_buf_get_name(0),
-						"--",
-						"-",
-					},
-					stdin = true,
-				}
-			end,
+			require("formatter.filetypes.lua").stylua,
+		},
+		["python"] = {
+			require("formatter.filetypes.python").black,
 		},
 		["cs"] = {
 			function()
@@ -28,7 +20,7 @@ require("formatter").setup({
 					args = {
 						"--write-stdout",
 						"--check",
-						vim.api.nvim_buf_get_name(0),
+						util.escape_path(util.get_current_buffer_file_path()),
 					},
 					stdin = true,
 				}
@@ -39,12 +31,12 @@ require("formatter").setup({
 				return {
 					exe = "goimports-reviser",
 					args = {
-						-- "-rm-unused",
+						"-rm-unused",
 						"-set-alias",
 						"-format",
 						"-output",
 						"stdout",
-						vim.api.nvim_buf_get_name(0),
+						util.escape_path(util.get_current_buffer_file_path()),
 					},
 					stdin = true,
 				}
@@ -62,7 +54,7 @@ require("formatter").setup({
 				end
 				return {
 					exe = "prettierd",
-					args = { vim.api.nvim_buf_get_name(0) },
+					args = { util.escape_path(util.get_current_buffer_file_path()) },
 					stdin = true,
 				}
 			end,

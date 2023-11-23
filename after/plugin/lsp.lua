@@ -6,24 +6,6 @@ lsp_zero.preset("recommended")
 require("mason").setup({})
 
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"tsserver",
-		"eslint",
-		"svelte",
-		"tailwindcss",
-		"jsonls",
-		"bashls",
-		"clangd",
-		"emmet_language_server",
-		"omnisharp",
-		"ltex",
-		"lua_ls",
-		"sqlls",
-		"html",
-		"gopls",
-		"dockerls",
-		"docker_compose_language_service",
-	},
 	handlers = {
 		lsp_zero.default_setup,
 		eslint = lsp_zero.noop,
