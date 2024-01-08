@@ -9,6 +9,7 @@ require("mason").setup({
 })
 
 require("mason-lspconfig").setup({
+	-- for lsp
 	ensure_installed = {
 		"tsserver",
 		"eslint",
@@ -16,7 +17,6 @@ require("mason-lspconfig").setup({
 		"tailwindcss",
 		"jsonls",
 		"bashls",
-		"clangd",
 		"emmet_language_server",
 		"omnisharp",
 		"ltex",
@@ -30,12 +30,12 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-null-ls").setup({
-	-- ensure installed with mason-null-ls
+	-- for formatter
 	ensure_installed = {
 		"stylua",
 		"prettierd",
-		"csharpier",
 		"goimports-reviser",
 		"black",
+		"clang-format",
 	},
 })

@@ -6,32 +6,16 @@ require("formatter").setup({
 	-- Set the log level
 	log_level = vim.log.levels.WARN,
 	filetype = {
-		["lua"] = {
-			require("formatter.filetypes.lua").stylua,
-		},
-		["python"] = {
-			require("formatter.filetypes.python").black,
-		},
-		["cs"] = {
-			function()
-				-- csharpier
-				return {
-					exe = "dotnet-csharpier",
-					args = {
-						"--write-stdout",
-						"--check",
-						util.escape_path(util.get_current_buffer_file_path()),
-					},
-					stdin = true,
-				}
-			end,
-		},
+		["lua"] = { require("formatter.filetypes.lua").stylua },
+		["python"] = { require("formatter.filetypes.python").black },
+		["cpp"] = { require("formatter.filetypes.cpp").clangformat },
+		["cs"] = { require("formatter.filetypes.cs").clangformat },
 		["go"] = {
 			function()
 				return {
 					exe = "goimports-reviser",
 					args = {
-						"-rm-unused",
+						-- "-rm-unused",
 						"-set-alias",
 						"-format",
 						"-output",
@@ -63,14 +47,14 @@ require("formatter").setup({
 	},
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.cs",
-	callback = function()
-		if vim.opt.fileformat ~= "unix" then
-			vim.opt.fileformat = "unix"
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = "*.cs",
+-- 	callback = function()
+-- 		if vim.opt.fileformat ~= "unix" then
+-- 			vim.opt.fileformat = "unix"
+-- 		end
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
