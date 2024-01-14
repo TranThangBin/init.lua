@@ -47,15 +47,6 @@ require("formatter").setup({
 	},
 })
 
--- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = "*.cs",
--- 	callback = function()
--- 		if vim.opt.fileformat ~= "unix" then
--- 			vim.opt.fileformat = "unix"
--- 		end
--- 	end,
--- })
-
 vim.api.nvim_create_autocmd("BufWritePost", {
 	callback = function()
 		vim.cmd("FormatWrite")

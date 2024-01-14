@@ -13,6 +13,18 @@ require("mason-lspconfig").setup({
 			local lua_opts = lsp_zero.nvim_lua_ls()
 			lsp_config.lua_ls.setup(lua_opts)
 		end,
+		clangd = function()
+			lsp_config.clangd.setup({
+				init_options = {
+					fallbackFlags = {
+						"--target=x86_64-w64-windows-gnu",
+						"-x",
+						"c++",
+						"-std=c++20",
+					},
+				},
+			})
+		end,
 	},
 })
 

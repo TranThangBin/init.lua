@@ -15,6 +15,7 @@ require("mason-lspconfig").setup({
 		"eslint",
 		"svelte",
 		"tailwindcss",
+		"clangd",
 		"jsonls",
 		"bashls",
 		"emmet_language_server",
