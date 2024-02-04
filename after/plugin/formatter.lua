@@ -29,13 +29,6 @@ require("formatter").setup({
 		["*"] = {
 			-- prettierd
 			function()
-				local current_file = vim.api.nvim_buf_get_name(0)
-				local is_gitignore = current_file:match("%.gitignore$")
-				local is_markdown = current_file:match("%.md$")
-				local is_ignored_files = is_gitignore or is_markdown
-				if is_ignored_files then
-					return nil
-				end
 				return {
 					exe = "prettierd",
 					args = { util.escape_path(util.get_current_buffer_file_path()) },

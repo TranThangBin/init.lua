@@ -66,4 +66,13 @@ return require("packer").startup(function(use)
 		"LunarWatcher/auto-pairs",
 		branch = "develop",
 	})
+	use("ThePrimeagen/vim-apm")
+	use({
+		"kylechui/nvim-surround",
+		tag = "*",
+	})
+	use({
+		"folke/trouble.nvim",
+		requires = { "nvim-tree/nvim-web-devicons" },
+	})
 end)
