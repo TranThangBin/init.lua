@@ -8,6 +8,7 @@ require("formatter").setup({
 	filetype = {
 		["lua"] = { require("formatter.filetypes.lua").stylua },
 		["python"] = { require("formatter.filetypes.python").black },
+		["c"] = { require("formatter.filetypes.c").clangformat },
 		["cpp"] = { require("formatter.filetypes.cpp").clangformat },
 		["cs"] = { require("formatter.filetypes.cs").clangformat },
 		["go"] = {
