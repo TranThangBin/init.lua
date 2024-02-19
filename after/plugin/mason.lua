@@ -22,7 +22,6 @@ require("mason-lspconfig").setup({
 		"omnisharp",
 		"ltex",
 		"lua_ls",
-		"sqlls",
 		"html",
 		"gopls",
 		"dockerls",
@@ -34,9 +33,8 @@ require("mason-null-ls").setup({
 	-- for formatter
 	ensure_installed = {
 		"stylua",
-		"prettierd",
-		"goimports-reviser",
 		"black",
 		"clang-format",
+		"prettierd",
 	},
 })
