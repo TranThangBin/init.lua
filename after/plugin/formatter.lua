@@ -1,3 +1,5 @@
+local util = require("formatter.util")
+
 require("formatter").setup({
 	-- Enable or disable logging
 	logging = true,
@@ -12,7 +14,10 @@ require("formatter").setup({
 		go = { require("formatter.filetypes.go").gofmt },
 		javascript = { require("formatter.filetypes.javascript").prettierd },
 		typescript = { require("formatter.filetypes.typescript").prettierd },
-		["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
+		["*"] = {
+			require("formatter.filetypes.any").remove_trailing_whitespace,
+			util.copyf(require("formatter.defaults").prettierd),
+		},
 	},
 })
 
