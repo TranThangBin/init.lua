@@ -1,6 +1,6 @@
-local harpoon = require("harpoon")
+local ok, harpoon = pcall(require, "harpoon")
 
-if harpoon ~= nil then
+if ok then
 	local ui = require("harpoon.ui")
 	local term = require("harpoon.term")
 	local MAXFILES = 5

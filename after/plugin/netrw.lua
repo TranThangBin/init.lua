@@ -1,5 +1,6 @@
-local netrw = require("netrw")
-if netrw ~= nil then
+local ok, netrw = pcall(require, "netrw")
+
+if ok then
 	netrw.setup({
 		-- Put your configuration here, or leave the object empty to take the default
 		-- configuration.

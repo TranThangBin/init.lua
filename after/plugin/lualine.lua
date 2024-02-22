@@ -1,6 +1,6 @@
-local lualine = require("lualine")
+local ok, lualine = pcall(require, "lualine")
 
-if lualine ~= nil then
+if ok then
 	lualine.setup({
 		options = {
 			icons_enabled = true,

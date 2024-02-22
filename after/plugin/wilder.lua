@@ -1,6 +1,6 @@
-local wilder = require("wilder")
+local ok, wilder = pcall(require, "wilder")
 
-if wilder ~= nil then
+if ok then
 	wilder.setup({
 		modes = { ":", "/", "?" },
 		next_key = "<Tab>",

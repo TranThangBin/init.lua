@@ -1,6 +1,6 @@
-local rose_pine = require("rose-pine")
+local ok, rose_pine = pcall(require, "rose-pine")
 
-if rose_pine ~= nil then
+if ok then
 	rose_pine.setup({
 		variant = "auto", -- auto, main, moon, or dawn
 		dark_variant = "main", -- main, moon, or dawn

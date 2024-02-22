@@ -1,6 +1,6 @@
-local telescope = require("telescope")
+local ok, telescope = pcall(require, "telescope")
 
-if telescope ~= nil then
+if ok then
 	local builtin = require("telescope.builtin")
 	local trouble = require("trouble.providers.telescope")
 

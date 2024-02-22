@@ -1,6 +1,6 @@
-local surround = require("nvim-surround")
+local ok, surround = pcall(require, "nvim-surround")
 
-if surround ~= nil then
+if ok then
 	surround.setup({
 		keymaps = {
 			insert = "<C-g>s",

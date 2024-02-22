@@ -1,6 +1,6 @@
-local lsp_zero = require("lsp-zero")
+local ok, lsp_zero = pcall(require, "lsp-zero")
 
-if lsp_zero ~= nil then
+if ok then
 	local lsp_config = require("lspconfig")
 
 	lsp_zero.preset("recommended")

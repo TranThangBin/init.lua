@@ -1,6 +1,6 @@
-local comment = require("Comment")
+local ok, comment = pcall(require, "Comment")
 
-if comment ~= nil then
+if ok then
 	comment.setup({
 		--Add a space b/w comment and the line
 		padding = true,

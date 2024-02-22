@@ -1,6 +1,6 @@
-local formatter = require("formatter")
+local ok, formatter = pcall(require, "formatter")
 
-if formatter ~= nil then
+if ok then
 	local util = require("formatter.util")
 
 	formatter.setup({

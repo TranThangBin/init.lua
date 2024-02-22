@@ -1,6 +1,6 @@
-local mason = require("mason")
+local ok, mason = pcall(require, "mason")
 
-if mason ~= nil then
+if ok then
 	mason.setup({
 		ui = {
 			icons = {
