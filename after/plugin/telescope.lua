@@ -2,11 +2,11 @@ local ok, telescope = pcall(require, "telescope")
 
 if ok then
 	local builtin = require("telescope.builtin")
-	local trouble = require("trouble.providers.telescope")
+	local ok, trouble = pcall(require, "trouble.providers.telescope")
 
 	local mappings = {}
 
-	if trouble ~= nil then
+	if ok then
 		mappings = {
 			i = { ["<C-t>"] = trouble.open_with_trouble },
 			n = { ["<C-t>"] = trouble.open_with_trouble },
