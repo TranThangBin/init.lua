@@ -1,3 +1,5 @@
+vim.opt.guicursor = ""
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -32,4 +34,3 @@ vim.opt.colorcolumn = "80"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.mouse = ""
-vim.opt.shell = "cmd.exe"
