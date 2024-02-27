@@ -80,4 +80,5 @@ return require("packer").startup(function(use)
 		"startup-nvim/startup.nvim",
 		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	})
+	use("ColaMint/pokemon.nvim")
 end)
