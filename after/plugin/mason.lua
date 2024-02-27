@@ -11,34 +11,38 @@ if ok then
 		},
 	})
 
-	require("mason-lspconfig").setup({
-		-- for lsp
-		ensure_installed = {
-			"tsserver",
-			"eslint",
-			"svelte",
-			"tailwindcss",
-			"clangd",
-			"jsonls",
-			"bashls",
-			"emmet_language_server",
-			"omnisharp",
-			"ltex",
-			"lua_ls",
-			"html",
-			"gopls",
-			"dockerls",
-			"docker_compose_language_service",
-		},
-	})
+	vim.api.nvim_create_user_command("SetupLspAndFmt", function()
+		require("mason-lspconfig").setup({
+			-- for lsp
+			ensure_installed = {
+				"tsserver",
+				"pyright",
+				"cmake",
+				"eslint",
+				"svelte",
+				"tailwindcss",
+				"clangd",
+				"jsonls",
+				"bashls",
+				"emmet_language_server",
+				"omnisharp",
+				"ltex",
+				"lua_ls",
+				"html",
+				"gopls",
+				"dockerls",
+				"docker_compose_language_service",
+			},
+		})
 
-	require("mason-null-ls").setup({
-		-- for formatter
-		ensure_installed = {
-			"stylua",
-			"black",
-			"clang-format",
-			"prettierd",
-		},
-	})
+		require("mason-null-ls").setup({
+			-- for formatter
+			ensure_installed = {
+				"stylua",
+				"black",
+				"clang-format",
+				"prettierd",
+			},
+		})
+	end, {})
 end

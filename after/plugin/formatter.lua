@@ -25,12 +25,10 @@ if ok then
 	})
 
 	vim.keymap.set("n", "<leader>fm", function()
-		vim.cmd("FormatWrite")
+		vim.cmd("Format")
 	end)
 
-	-- vim.api.nvim_create_autocmd("BufWritePost", {
-	-- 	callback = function()
-	-- 		vim.cmd("FormatWrite")
-	-- 	end,
-	-- })
+	vim.keymap.set("n", "<leader>fw", function()
+		vim.cmd("FormatWrite")
+	end)
 end
