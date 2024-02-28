@@ -11,7 +11,7 @@ if ok then
 		},
 	})
 
-	vim.api.nvim_create_user_command("SetupLspAndFmt", function()
+	vim.api.nvim_create_user_command("SetupLsp", function()
 		require("mason-lspconfig").setup({
 			-- for lsp
 			ensure_installed = {
@@ -34,7 +34,9 @@ if ok then
 				"docker_compose_language_service",
 			},
 		})
+	end, {})
 
+	vim.api.nvim_create_user_command("SetupFmt", function()
 		require("mason-null-ls").setup({
 			-- for formatter
 			ensure_installed = {
