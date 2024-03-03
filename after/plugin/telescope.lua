@@ -1,8 +1,10 @@
-local ok, telescope = pcall(require, "telescope")
+local ok, telescope, trouble
+
+ok, telescope = pcall(require, "telescope")
 
 if ok then
 	local builtin = require("telescope.builtin")
-	local ok, trouble = pcall(require, "trouble.providers.telescope")
+	ok, trouble = pcall(require, "trouble.providers.telescope")
 
 	local mappings = {}
 

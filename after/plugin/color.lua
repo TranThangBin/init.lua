@@ -53,14 +53,14 @@ if ok then
 
 		before_highlight = function(group, highlight, palette)
 			-- Disable all undercurls
-			-- if highlight.undercurl then
-			-- 	highlight.undercurl = false
-			-- end
-			--
+			if highlight.undercurl then
+				highlight.undercurl = false
+			end
+            --
 			-- Change palette colour
-			-- if highlight.fg == palette.pine then
-			-- 	highlight.fg = palette.foam
-			-- end
+			if highlight.fg == palette.pine then
+				highlight.fg = palette.foam
+			end
 		end,
 	})
 
@@ -79,6 +79,12 @@ if ok then
 		vim.cmd.colorscheme(theme)
 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	end
+
+	for i = 1, #themes do
+		vim.keymap.set("n", "<leader>cl" .. i, function()
+			ColorMyPencils(i)
+		end)
 	end
 
 	ColorMyPencils()

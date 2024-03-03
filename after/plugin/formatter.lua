@@ -1,8 +1,6 @@
 local ok, formatter = pcall(require, "formatter")
 
 if ok then
-	local util = require("formatter.util")
-
 	formatter.setup({
 		-- Enable or disable logging
 		logging = true,
@@ -17,18 +15,12 @@ if ok then
 			go = { require("formatter.filetypes.go").gofmt },
 			javascript = { require("formatter.filetypes.javascript").prettierd },
 			typescript = { require("formatter.filetypes.typescript").prettierd },
-			["*"] = {
-				require("formatter.filetypes.any").remove_trailing_whitespace,
-				util.copyf(require("formatter.defaults").prettierd),
-			},
+			json = { require("formatter.filetypes.json").prettierd },
+			["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
 		},
 	})
 
 	vim.keymap.set("n", "<leader>fm", function()
 		vim.cmd("Format")
-	end)
-
-	vim.keymap.set("n", "<leader>fw", function()
-		vim.cmd("FormatWrite")
 	end)
 end

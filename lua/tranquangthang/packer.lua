@@ -1,44 +1,83 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
+vim.cmd("packadd packer.nvim")
 
 return require("packer").startup(function(use)
-	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
-	use({
-		"nvim-telescope/telescope.nvim",
-		-- tag = "0.1.2",
-		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
-
-	use({
-		"rose-pine/neovim",
-		as = "rose-pine",
-		-- tag = "v0.1.0", -- Optional tag release
-	})
-
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/playground")
 
 	use("ThePrimeagen/harpoon")
 
-	use("mbbill/undotree")
+	use("ThePrimeagen/vim-be-good")
 
-	use("tpope/vim-fugitive")
+	use("folke/trouble.nvim")
+
+	use("folke/zen-mode.nvim")
+
+	use("gelguy/wilder.nvim")
+
+	use("mhartington/formatter.nvim")
+
+	use("nvim-lua/plenary.nvim")
+
+	use("nvim-telescope/telescope.nvim")
+
+	use("rose-pine/neovim")
+
+	use({
+		"nvim-treesitter/nvim-treesitter",
+
+		config = function()
+			require("nvim-treesitter").setup({
+				ensure_installed = { "javascript", "typescript", "c", "lua", "vim", "vimdoc", "query" },
+				sync_install = false,
+				auto_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+			})
+		end,
+	}, { run = ":TSUpdate" })
+
+	use({
+		"windwp/nvim-ts-autotag",
+
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	})
+
+	use({
+		"mbbill/undotree",
+
+		config = function()
+			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+		end,
+	})
+
+	use({
+		"tpope/vim-fugitive",
+
+		config = function()
+			vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+			vim.keymap.set("n", "gl", "<cmd>diffget //2<CR>")
+			vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+		end,
+	})
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
+
 		branch = "v3.x",
+
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
 			{ "williamboman/mason.nvim" }, -- Optional
 			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-			{ "jose-elias-alvarez/null-ls.nvim" }, -- dependency of mason-null-ls
-			{ "jay-babu/mason-null-ls.nvim" }, -- Ensure installed formatter
 			{ "Issafalcon/lsp-overloads.nvim" },
 
 			-- Autocompletion
@@ -55,8 +94,6 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use("mhartington/formatter.nvim")
-
 	use({
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -64,40 +101,201 @@ return require("packer").startup(function(use)
 		opts = {},
 	})
 
-	use("numToStr/Comment.nvim")
+	use({
+		"numToStr/Comment.nvim",
 
-	use("gelguy/wilder.nvim")
+		config = function()
+			require("Comment").setup({
+				padding = true,
+				sticky = true,
+				ignore = nil,
+				toggler = {
+					line = "gcc",
+					block = "gbc",
+				},
+				opleader = {
+					line = "gc",
+					block = "gb",
+				},
+				extra = {
+					above = "gcO",
+					below = "gco",
+					eol = "gcA",
+				},
+				mappings = {
+					basic = true,
+					extra = true,
+				},
+				pre_hook = nil,
+				post_hook = nil,
+			})
+		end,
+	})
 
-	use("windwp/nvim-ts-autotag")
+	use({
+		"nvim-tree/nvim-web-devicons",
+
+		config = function()
+			require("nvim-web-devicons").setup({
+				override = {
+					zsh = {
+						icon = "",
+						color = "#428850",
+						cterm_color = "65",
+						name = "Zsh",
+					},
+				},
+				color_icons = true,
+				default = true,
+				strict = true,
+				override_by_filename = {
+					[".gitignore"] = {
+						icon = "",
+						color = "#f1502f",
+						name = "Gitignore",
+					},
+				},
+				override_by_extension = {
+					["log"] = {
+						icon = "",
+						color = "#81e043",
+						name = "Log",
+					},
+				},
+			})
+		end,
+	})
 
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
+
+		config = function()
+			require("lualine").setup({
+				options = {
+					icons_enabled = true,
+					theme = "auto",
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+					disabled_filetypes = {
+						statusline = {},
+						winbar = {},
+					},
+					ignore_focus = {},
+					always_divide_middle = true,
+					globalstatus = false,
+					refresh = {
+						statusline = 1000,
+						tabline = 1000,
+						winbar = 1000,
+					},
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_c = { "filename" },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = { "filename" },
+					lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+				tabline = {},
+				winbar = {},
+				inactive_winbar = {},
+				extensions = {},
+			})
+		end,
 	})
 
-	use("prichrd/netrw.nvim")
+	use({
+		"prichrd/netrw.nvim",
+
+		config = function()
+			require("netrw").setup({
+				-- Put your configuration here, or leave the object empty to take the default
+				-- configuration.
+				icons = {
+					symlink = "", -- Symlink icon (directory and file)
+					directory = "", -- Directory icon
+					file = "", -- File icon
+				},
+				use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
+				mappings = {}, -- Custom key mappings
+			})
+		end,
+	})
 
 	use({
 		"LunarWatcher/auto-pairs",
+
 		branch = "develop",
+
+		config = function()
+			vim.api.nvim_set_var("AutoPairsMapBS", 1)
+			vim.api.nvim_set_var("AutoPairsMapBSIn", 1)
+			vim.api.nvim_set_var("AutoPairsMapCR", 0)
+		end,
 	})
 
-	use("ThePrimeagen/vim-apm")
+	use({
+		"ThePrimeagen/vim-apm",
+
+		config = function()
+			local apm = require("vim-apm")
+
+			apm:setup({})
+			vim.keymap.set("n", "<leader>apm", function()
+				apm:toggle_monitor()
+			end)
+		end,
+	})
 
 	use({
 		"kylechui/nvim-surround",
+
 		tag = "*",
-	})
 
-	use({
-		"folke/trouble.nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("nvim-surround").setup({
+				keymaps = {
+					insert = "<C-g>s",
+					insert_line = "<C-g>S",
+					normal = "ys",
+					normal_cur = "yss",
+					normal_line = "yS",
+					normal_cur_line = "ySS",
+					visual = "S",
+					visual_line = "gS",
+					delete = "ds",
+					change = "cs",
+					change_line = "cS",
+				},
+			})
+		end,
 	})
-
-	use("ThePrimeagen/vim-be-good")
 
 	use({
 		"startup-nvim/startup.nvim",
-		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+
+		config = function()
+			local dashboard = require("startup.themes.dashboard")
+
+			dashboard.header.content = {
+				"████████╗████████╗██████╗    ███╗  ██╗██╗   ██╗██╗███╗   ███╗",
+				"╚══██╔══╝╚══██╔══╝██╔══██╗   ████╗ ██║██║   ██║██║████╗ ████║",
+				"   ██║      ██║   ██████╦╝   ██╔██╗██║╚██╗ ██╔╝██║██╔████╔██║",
+				"   ██║      ██║   ██╔══██╗   ██║╚████║ ╚████╔╝ ██║██║╚██╔╝██║",
+				"   ██║      ██║   ██████╦╝██╗██║ ╚███║  ╚██╔╝  ██║██║ ╚═╝ ██║",
+				"   ╚═╝      ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚══╝   ╚═╝   ╚═╝╚═╝     ╚═╝",
+			}
+
+			require("startup").setup(dashboard)
+		end,
 	})
 end)

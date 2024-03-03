@@ -5,7 +5,15 @@ if ok then
 
 	lsp_zero.preset("recommended")
 
-	require("mason").setup({})
+	require("mason").setup({
+		ui = {
+			icons = {
+				package_installed = "✓",
+				package_pending = "➜",
+				package_uninstalled = "✗",
+			},
+		},
+	})
 
 	require("mason-lspconfig").setup({
 		handlers = {
