@@ -246,14 +246,14 @@ return require("packer").startup(function(use)
 	use({
 		"ThePrimeagen/vim-apm",
 
-		config = function()
-			local apm = require("vim-apm")
-
-			apm:setup({})
-			vim.keymap.set("n", "<leader>apm", function()
-				apm:toggle_monitor()
-			end)
-		end,
+		-- config = function()
+		-- 	local apm = require("vim-apm")
+		--
+		-- 	apm:setup({})
+		-- 	vim.keymap.set("n", "<leader>apm", function()
+		-- 		apm:toggle_monitor()
+		-- 	end)
+		-- end,
 	})
 
 	use({
@@ -293,6 +293,15 @@ return require("packer").startup(function(use)
 				"   ██║      ██║   ██╔══██╗   ██║╚████║ ╚████╔╝ ██║██║╚██╔╝██║",
 				"   ██║      ██║   ██████╦╝██╗██║ ╚███║  ╚██╔╝  ██║██║ ╚═╝ ██║",
 				"   ╚═╝      ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚══╝   ╚═╝   ╚═╝╚═╝     ╚═╝",
+			}
+
+			dashboard.body.content = {
+				{ "🖿    File Explorer", "Explore", "<leader>fe" },
+				{ "☰    Marked Files", 'lua require("harpoon.ui").toggle_quick_menu()', "<leader>hm" },
+				{ "    Git Status", "Git", "<leader>gs" },
+				{ "    Find File", "Telescope find_files", "<leader>ff" },
+				{ "󰍉    Find Word", "Telescope live_grep", "<leader>lg" },
+				{ "    Recent Files", "Telescope oldfiles", "<leader>of" },
 			}
 
 			require("startup").setup(dashboard)

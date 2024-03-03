@@ -1,9 +1,10 @@
 local ok, harpoon = pcall(require, "harpoon")
 
+local MAXFILES = 5
+
 if ok then
 	local ui = require("harpoon.ui")
 	local term = require("harpoon.term")
-	local MAXFILES = 5
 
 	harpoon.setup({
 		menu = {
