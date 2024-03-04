@@ -105,9 +105,10 @@ local function lsp_on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
 	vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+	-- vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 	if client.server_capabilities.signatureHelpProvider then
 		require("lsp-overloads").setup(client, lsp_overloads_config)
+		vim.keymap.set({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature, opts)
 	end
 end
 
@@ -122,10 +123,6 @@ vim.diagnostic.config({
 		prefix = "",
 	},
 })
-vim.keymap.set({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature)
-vim.keymap.set("n", "<A-d>", function()
-	vim.diagnostic.open_float(0, { scope = "line" })
-end)
 
 if ok then
 	local lsp_config = require("lspconfig")
