@@ -3,28 +3,28 @@ local ok, telescope, trouble
 ok, telescope = pcall(require, "telescope")
 
 if ok then
-	local builtin = require("telescope.builtin")
-	ok, trouble = pcall(require, "trouble.providers.telescope")
+    local builtin = require("telescope.builtin")
+    ok, trouble = pcall(require, "trouble.providers.telescope")
 
-	local mappings = {}
+    local mappings = {}
 
-	if ok then
-		mappings = {
-			i = { ["<C-t>"] = trouble.open_with_trouble },
-			n = { ["<C-t>"] = trouble.open_with_trouble },
-		}
-	end
+    if ok then
+        mappings = {
+            i = { ["<C-t>"] = trouble.open_with_trouble },
+            n = { ["<C-t>"] = trouble.open_with_trouble },
+        }
+    end
 
-	vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-	vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
-	vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-	vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-	vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
-	vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+    vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
+    vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+    vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+    vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
+    vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
 
-	telescope.setup({
-		defaults = {
-			mappings = mappings,
-		},
-	})
+    telescope.setup({
+        defaults = {
+            mappings = mappings,
+        },
+    })
 end
