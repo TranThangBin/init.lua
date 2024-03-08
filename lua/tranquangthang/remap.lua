@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>fe", function()
 
     io.close(f)
 
-    vim.cmd("Ex|/" .. vim.fn.expand("%:t"))
+    vim.cmd("Ex|/^" .. vim.fn.expand("%:t"))
 end)
 
 vim.keymap.set("n", "<leader>w", function()

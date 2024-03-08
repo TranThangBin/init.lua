@@ -12,10 +12,6 @@ return require("packer").startup(function(use)
 
     use("ThePrimeagen/vim-be-good")
 
-    use("folke/trouble.nvim")
-
-    use("folke/zen-mode.nvim")
-
     use("gelguy/wilder.nvim")
 
     use("nvim-lua/plenary.nvim")
@@ -23,10 +19,29 @@ return require("packer").startup(function(use)
     use("nvim-telescope/telescope.nvim")
 
     use({
+        "folke/trouble.nvim",
+
+        config = function()
+            require("trouble").setup(require("configs.trouble-conf"))
+        end
+    })
+
+    use({
+        "folke/zen-mode.nvim",
+
+        config = function()
+            require("zen-mode").setup(require("configs.zenmode-conf"))
+        end
+    })
+
+    use({
         "rose-pine/neovim",
 
         config = function()
             require("rose-pine").setup(require("configs.rose-pine-conf"))
+            vim.cmd.colorscheme("rose-pine-moon")
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         end,
     })
 
@@ -45,15 +60,24 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "nvim-treesitter/nvim-treesitter",
-
-        config = function()
-            require("nvim-treesitter").setup(require("configs.treesitter-conf"))
-        end,
-    }, { run = ":TSUpdate" })
-
-    use({
         "windwp/nvim-ts-autotag",
+
+        requires = {
+            {
+                "nvim-treesitter/nvim-treesitter",
+
+                config = function()
+                    require("nvim-treesitter").setup(
+                        require("configs.treesitter-conf")
+                    )
+                end,
+
+                run = function()
+                    require('nvim-treesitter.install').
+                        update({ with_sync = true })()
+                end,
+            }
+        },
 
         config = function()
             require("nvim-ts-autotag").setup()
@@ -85,8 +109,14 @@ return require("packer").startup(function(use)
 
         requires = {
             -- LSP Support
-            { "neovim/nvim-lspconfig" },             -- Required
-            { "williamboman/mason.nvim" },           -- Optional
+            { "neovim/nvim-lspconfig" }, -- Required
+            {
+                "williamboman/mason.nvim",
+
+                config = function()
+                    require("mason").setup(require("configs.mason-conf"))
+                end
+            },                                       -- Optional
             { "williamboman/mason-lspconfig.nvim" }, -- Optional
             { "Issafalcon/lsp-overloads.nvim" },
 
@@ -135,18 +165,6 @@ return require("packer").startup(function(use)
 
         config = function()
             require("netrw").setup(require("configs.netrw-conf"))
-        end,
-    })
-
-    use({
-        "LunarWatcher/auto-pairs",
-
-        branch = "develop",
-
-        config = function()
-            vim.api.nvim_set_var("AutoPairsMapBS", 1)
-            vim.api.nvim_set_var("AutoPairsMapBSIn", 1)
-            vim.api.nvim_set_var("AutoPairsMapCR", 0)
         end,
     })
 

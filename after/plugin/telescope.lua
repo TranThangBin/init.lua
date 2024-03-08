@@ -6,13 +6,19 @@ if ok then
     local builtin = require("telescope.builtin")
     ok, trouble = pcall(require, "trouble.providers.telescope")
 
-    local mappings = {}
+    local normalMapping = {
+        q = require("telescope.actions").close,
+    }
+    local insertMapping = {}
+
+    local mappings = {
+        n = normalMapping,
+        i = insertMapping,
+    }
 
     if ok then
-        mappings = {
-            i = { ["<C-t>"] = trouble.open_with_trouble },
-            n = { ["<C-t>"] = trouble.open_with_trouble },
-        }
+        normalMapping["<C-t>"] = trouble.open_with_trouble
+        insertMapping["<C-t>"] = trouble.open_with_trouble
     end
 
     vim.keymap.set("n", "<leader>ff", builtin.find_files, {})

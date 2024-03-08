@@ -1,57 +1,6 @@
 local ok, lsp_zero = pcall(require, "lsp-zero")
 
-local mason_config = {
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-        },
-    },
-}
-
-local function mason_lspconfig_handler(_lsp_zero, _lsp_config)
-    return {
-        _lsp_zero.default_setup,
-        eslint = _lsp_zero.noop,
-        lua_ls = function()
-            local lua_opts = _lsp_zero.nvim_lua_ls()
-            _lsp_config.lua_ls.setup(lua_opts)
-        end,
-    }
-end
-
-local function cmp_mapping(_cmp, _cmp_action)
-    return _cmp.mapping.preset.insert({
-        -- confirm completion item
-        ["<CR>"] = _cmp.mapping.confirm({ select = false }),
-        ["<Tab>"] = _cmp.mapping.confirm({ select = false }),
-
-        -- toggle completion menu
-        ["<C-n>"] = _cmp_action.toggle_completion(),
-
-        -- tab complete
-        ["<C-j>"] = _cmp.mapping.select_next_item(),
-        ["<C-k>"] = _cmp.mapping.select_prev_item(),
-
-        -- navigate between snippet placeholder
-        ["<C-d>"] = _cmp_action.luasnip_jump_forward(),
-        ["<C-b>"] = _cmp_action.luasnip_jump_backward(),
-
-        -- scroll documentation window
-        ["<C-f>"] = _cmp.mapping.scroll_docs(-5),
-        -- ["<C-d>"] = cmp.mapping.scroll_docs(5),
-    })
-end
-
-local function cmp_window(_cmp)
-    return {
-        completion = _cmp.config.window.bordered(),
-        documentation = _cmp.config.window.bordered(),
-    }
-end
-
-local cmp_sources = {
+local sources = {
     { name = "path" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
@@ -59,7 +8,7 @@ local cmp_sources = {
     { name = "luasnip", keyword_length = 2 },
 }
 
-local lsp_zero_preferences = {
+local preferences = {
     sign_icons = {
         error = "✘",
         warn = "▲",
@@ -68,7 +17,7 @@ local lsp_zero_preferences = {
     },
 }
 
-local lsp_overloads_config = {
+local overloads_config = {
     ui = {
         border = "single",
         height = nil,
@@ -108,7 +57,7 @@ local function lsp_on_attach(client, bufnr)
     vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, opts)
     -- vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
     if client.server_capabilities.signatureHelpProvider then
-        require("lsp-overloads").setup(client, lsp_overloads_config)
+        require("lsp-overloads").setup(client, overloads_config)
         vim.keymap.set({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature, opts)
     end
 end
@@ -128,29 +77,57 @@ vim.diagnostic.config({
 if ok then
     lsp_zero.preset("recommended")
 
-    require("mason").setup(mason_config)
-
     require("mason-lspconfig").setup({
-        handlers = mason_lspconfig_handler(lsp_zero, require("lspconfig")),
+        handlers = {
+            lsp_zero.default_setup,
+            eslint = lsp_zero.noop,
+            lua_ls = function()
+                local lua_opts = lsp_zero.nvim_lua_ls()
+                require("lspconfig").lua_ls.setup(lua_opts)
+            end,
+        },
     })
 
     local cmp = require("cmp")
+    local cmp_action = lsp_zero.cmp_action()
     require("luasnip.loaders.from_vscode").lazy_load()
-    vim.opt.completeopt = { "menu", "menuone", "noselect" }
+    -- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
     cmp.setup({
-        mapping = cmp_mapping(cmp, lsp_zero.cmp_action()),
+        mapping = cmp.mapping.preset.insert({
+            -- confirm completion item
+            ["<CR>"] = cmp.mapping.confirm({ select = false }),
+            ["<Tab>"] = cmp.mapping.confirm({ select = false }),
 
-        sources = cmp_sources,
-        window = cmp_window(cmp),
+            -- toggle completion menu
+            ["<C-n>"] = cmp_action.toggle_completion(),
+
+            -- tab complete
+            ["<C-j>"] = cmp.mapping.select_next_item(),
+            ["<C-k>"] = cmp.mapping.select_prev_item(),
+
+            -- navigate between snippet placeholder
+            ["<C-w>"] = cmp_action.luasnip_jump_forward(),
+            ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+
+            -- scroll documentation window
+            ["<C-f>"] = cmp.mapping.scroll_docs(-5),
+            ["<C-d>"] = cmp.mapping.scroll_docs(5),
+        }),
+
+        window = {
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+        },
         preselect = "item",
         completion = {
             completeopt = "menu,menuone,noinsert",
         },
+        sources = sources,
         formatting = lsp_zero.cmp_format(),
     })
 
-    lsp_zero.set_preferences(lsp_zero_preferences)
+    lsp_zero.set_preferences(preferences)
 
     lsp_zero.on_attach(lsp_on_attach)
 
