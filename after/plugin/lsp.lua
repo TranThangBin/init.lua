@@ -111,7 +111,7 @@ if ok then
             ["<C-b>"] = cmp_action.luasnip_jump_backward(),
 
             -- scroll documentation window
-            ["<C-f>"] = cmp.mapping.scroll_docs(-5),
+            ["<C-u>"] = cmp.mapping.scroll_docs(-5),
             ["<C-d>"] = cmp.mapping.scroll_docs(5),
         }),
 
