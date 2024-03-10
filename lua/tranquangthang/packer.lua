@@ -4,212 +4,213 @@
 vim.cmd("packadd packer.nvim")
 
 return require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
+	use("wbthomason/packer.nvim")
 
-    use("nvim-treesitter/playground")
+	use("nvim-treesitter/playground")
 
-    use("ThePrimeagen/harpoon")
+	use("ThePrimeagen/harpoon")
 
-    use("ThePrimeagen/vim-be-good")
+	use("ThePrimeagen/vim-be-good")
 
-    use("gelguy/wilder.nvim")
+	use("gelguy/wilder.nvim")
 
-    use("nvim-lua/plenary.nvim")
+	use("nvim-lua/plenary.nvim")
 
-    use("nvim-telescope/telescope.nvim")
+	use("nvim-telescope/telescope.nvim")
 
-    use({
-        "windwp/nvim-autopairs",
+	use({
+		"mhartington/formatter.nvim",
 
-        event = "InsertEnter",
+		config = function()
+			require("formatter").setup(require("configs.formatter-conf"))
+			vim.keymap.set("n", "<leader>fm", vim.cmd.Format)
+		end,
+	})
 
-        config = function()
-            require("nvim-autopairs").setup({})
-        end
-    })
+	use({
+		"windwp/nvim-autopairs",
 
-    use({
-        "folke/trouble.nvim",
+		event = "InsertEnter",
 
-        config = function()
-            require("trouble").setup(require("configs.trouble-conf"))
-        end
-    })
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	})
 
-    use({
-        "folke/zen-mode.nvim",
+	use({
+		"folke/trouble.nvim",
 
-        config = function()
-            require("zen-mode").setup(require("configs.zenmode-conf"))
-        end
-    })
+		config = function()
+			require("trouble").setup(require("configs.trouble-conf"))
+		end,
+	})
 
-    use({
-        "rose-pine/neovim",
+	use({
+		"folke/zen-mode.nvim",
 
-        config = function()
-            require("rose-pine").setup(require("configs.rose-pine-conf"))
-            vim.cmd.colorscheme("rose-pine-moon")
-            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-        end,
-    })
+		config = function()
+			require("zen-mode").setup(require("configs.zenmode-conf"))
+		end,
+	})
 
-    use({
-        "folke/tokyonight.nvim",
+	use({
+		"rose-pine/neovim",
 
-        lazy = false,
+		config = function()
+			require("rose-pine").setup(require("configs.rose-pine-conf"))
+			vim.cmd.colorscheme("rose-pine-moon")
+			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+		end,
+	})
 
-        priority = 1000,
+	use({
+		"folke/tokyonight.nvim",
 
-        opts = {},
+		lazy = false,
 
-        config = function()
-            require("tokyonight").setup(require("configs.tokyonight-conf"))
-        end
-    })
+		priority = 1000,
 
-    use({
-        "windwp/nvim-ts-autotag",
+		opts = {},
 
-        requires = {
-            {
-                "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("tokyonight").setup(require("configs.tokyonight-conf"))
+		end,
+	})
 
-                config = function()
-                    require("nvim-treesitter").setup(
-                        require("configs.treesitter-conf")
-                    )
-                end,
+	use({
+		"windwp/nvim-ts-autotag",
 
-                run = function()
-                    require('nvim-treesitter.install').
-                        update({ with_sync = true })()
-                end,
-            }
-        },
+		requires = {
+			{
+				"nvim-treesitter/nvim-treesitter",
 
-        config = function()
-            require("nvim-ts-autotag").setup()
-        end,
-    })
+				run = function()
+					require("nvim-treesitter.install").update({ with_sync = true })()
+				end,
+			},
+		},
 
-    use({
-        "mbbill/undotree",
+		config = function()
+			require("nvim-treesitter").setup(require("configs.treesitter-conf"))
+			require("nvim-ts-autotag").setup()
+		end,
+	})
 
-        config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-        end,
-    })
+	use({
+		"mbbill/undotree",
 
-    use({
-        "tpope/vim-fugitive",
+		config = function()
+			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+		end,
+	})
 
-        config = function()
-            vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-            vim.keymap.set("n", "gl", "<cmd>diffget //2<CR>")
-            vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
-        end,
-    })
+	use({
+		"tpope/vim-fugitive",
 
-    use({
-        "VonHeikemen/lsp-zero.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+			vim.keymap.set("n", "gl", "<cmd>diffget //2<CR>")
+			vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+		end,
+	})
 
-        branch = "v3.x",
+	use({
+		"VonHeikemen/lsp-zero.nvim",
 
-        requires = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" }, -- Required
-            {
-                "williamboman/mason.nvim",
+		branch = "v3.x",
 
-                config = function()
-                    require("mason").setup(require("configs.mason-conf"))
-                end
-            },                                       -- Optional
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            { "Issafalcon/lsp-overloads.nvim" },
+		requires = {
+			-- LSP Support
+			{ "neovim/nvim-lspconfig" }, -- Required
+			{
+				"williamboman/mason.nvim",
 
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },         -- Required
-            { "hrsh7th/cmp-nvim-lsp" },     -- Required
-            { "hrsh7th/cmp-buffer" },       -- Optional
-            { "hrsh7th/cmp-path" },         -- Optional
-            { "saadparwaiz1/cmp_luasnip" }, -- Optional
-            { "hrsh7th/cmp-nvim-lua" },     -- Optional
+				config = function()
+					require("mason").setup(require("configs.mason-conf"))
+				end,
+			}, -- Optional
+			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+			{ "Issafalcon/lsp-overloads.nvim" },
 
-            -- Snippets
-            { "L3MON4D3/LuaSnip" },             -- Required
-            { "rafamadriz/friendly-snippets" }, -- Optional
-        },
-    })
+			-- Autocompletion
+			{ "hrsh7th/nvim-cmp" }, -- Required
+			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
+			{ "hrsh7th/cmp-buffer" }, -- Optional
+			{ "hrsh7th/cmp-path" }, -- Optional
+			{ "saadparwaiz1/cmp_luasnip" }, -- Optional
+			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
 
-    use({
-        "numToStr/Comment.nvim",
+			-- Snippets
+			{ "L3MON4D3/LuaSnip" }, -- Required
+			{ "rafamadriz/friendly-snippets" }, -- Optional
+		},
+	})
 
-        config = function()
-            require("Comment").setup(require("configs.comment-conf"))
-        end,
-    })
+	use({
+		"numToStr/Comment.nvim",
 
-    use({
-        "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("Comment").setup(require("configs.comment-conf"))
+		end,
+	})
 
-        config = function()
-            require("nvim-web-devicons").setup(
-                require("configs.web-devicons-conf")
-            )
-        end,
-    })
+	use({
+		"nvim-tree/nvim-web-devicons",
 
-    use({
-        "nvim-lualine/lualine.nvim",
+		config = function()
+			require("nvim-web-devicons").setup(require("configs.web-devicons-conf"))
+		end,
+	})
 
-        config = function()
-            require("lualine").setup(require("configs.lualine-conf"))
-        end,
-    })
+	use({
+		"nvim-lualine/lualine.nvim",
 
-    use({
-        "prichrd/netrw.nvim",
+		config = function()
+			require("lualine").setup(require("configs.lualine-conf"))
+		end,
+	})
 
-        config = function()
-            require("netrw").setup(require("configs.netrw-conf"))
-        end,
-    })
+	use({
+		"prichrd/netrw.nvim",
 
-    use({
-        "ThePrimeagen/vim-apm",
+		config = function()
+			require("netrw").setup(require("configs.netrw-conf"))
+		end,
+	})
 
-        -- config = function()
-        -- 	local apm = require("vim-apm")
-        --
-        -- 	apm:setup({})
-        -- 	vim.keymap.set("n", "<leader>apm", function()
-        -- 		apm:toggle_monitor()
-        -- 	end)
-        -- end,
-    })
+	use({
+		"ThePrimeagen/vim-apm",
 
-    use({
-        "kylechui/nvim-surround",
+		-- config = function()
+		-- 	local apm = require("vim-apm")
+		--
+		-- 	apm:setup({})
+		-- 	vim.keymap.set("n", "<leader>apm", function()
+		-- 		apm:toggle_monitor()
+		-- 	end)
+		-- end,
+	})
 
-        tag = "*",
+	use({
+		"kylechui/nvim-surround",
 
-        config = function()
-            require("nvim-surround").setup(require("configs.surround-conf"))
-        end,
-    })
+		tag = "*",
 
-    use({
-        "startup-nvim/startup.nvim",
+		config = function()
+			require("nvim-surround").setup(require("configs.surround-conf"))
+		end,
+	})
 
-        config = function()
-            local startup = require("startup")
+	use({
+		"startup-nvim/startup.nvim",
 
-            vim.keymap.set("n", "<leader>nf", startup.new_file)
+		config = function()
+			local startup = require("startup")
 
-            startup.setup(require("configs.startup-conf"))
-        end,
-    })
+			vim.keymap.set("n", "<leader>nf", startup.new_file)
+
+			startup.setup(require("configs.startup-conf"))
+		end,
+	})
 end)
