@@ -4,25 +4,21 @@
 vim.cmd("packadd packer.nvim")
 
 return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-
-	use("nvim-treesitter/playground")
-
-	use("ThePrimeagen/harpoon")
-
-	use("ThePrimeagen/vim-be-good")
-
-	use("gelguy/wilder.nvim")
-
-	use("nvim-lua/plenary.nvim")
-
-	use("nvim-telescope/telescope.nvim")
+	use({
+		"wbthomason/packer.nvim",
+		"ThePrimeagen/harpoon",
+		"ThePrimeagen/vim-be-good",
+		"gelguy/wilder.nvim",
+		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope.nvim",
+		"nvim-treesitter/playground",
+	})
 
 	use({
 		"mhartington/formatter.nvim",
 
 		config = function()
-			require("formatter").setup(require("configs.formatter-conf"))
+			require("formatter").setup(require("configs.formatter-config"))
 			vim.keymap.set("n", "<leader>fm", vim.cmd.Format)
 		end,
 	})
@@ -41,7 +37,7 @@ return require("packer").startup(function(use)
 		"folke/trouble.nvim",
 
 		config = function()
-			require("trouble").setup(require("configs.trouble-conf"))
+			require("trouble").setup(require("configs.trouble-config"))
 		end,
 	})
 
@@ -49,7 +45,7 @@ return require("packer").startup(function(use)
 		"folke/zen-mode.nvim",
 
 		config = function()
-			require("zen-mode").setup(require("configs.zenmode-conf"))
+			require("zen-mode").setup(require("configs.zenmode-config"))
 		end,
 	})
 
@@ -57,7 +53,7 @@ return require("packer").startup(function(use)
 		"rose-pine/neovim",
 
 		config = function()
-			require("rose-pine").setup(require("configs.rose-pine-conf"))
+			require("rose-pine").setup(require("configs.rose-pine-config"))
 			vim.cmd.colorscheme("rose-pine-moon")
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -67,32 +63,23 @@ return require("packer").startup(function(use)
 	use({
 		"folke/tokyonight.nvim",
 
-		lazy = false,
+		config = function()
+			require("tokyonight").setup(require("configs.tokyonight-config"))
+		end,
+	})
 
-		priority = 1000,
-
-		opts = {},
+	use({
+		"nvim-treesitter/nvim-treesitter",
 
 		config = function()
-			require("tokyonight").setup(require("configs.tokyonight-conf"))
+			require("nvim-treesitter.configs").setup(require("configs.treesitter-config"))
 		end,
 	})
 
 	use({
 		"windwp/nvim-ts-autotag",
 
-		requires = {
-			{
-				"nvim-treesitter/nvim-treesitter",
-
-				run = function()
-					require("nvim-treesitter.install").update({ with_sync = true })()
-				end,
-			},
-		},
-
 		config = function()
-			require("nvim-treesitter").setup(require("configs.treesitter-conf"))
 			require("nvim-ts-autotag").setup()
 		end,
 	})
@@ -127,7 +114,7 @@ return require("packer").startup(function(use)
 				"williamboman/mason.nvim",
 
 				config = function()
-					require("mason").setup(require("configs.mason-conf"))
+					require("mason").setup(require("configs.mason-config"))
 				end,
 			}, -- Optional
 			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
@@ -151,7 +138,7 @@ return require("packer").startup(function(use)
 		"numToStr/Comment.nvim",
 
 		config = function()
-			require("Comment").setup(require("configs.comment-conf"))
+			require("Comment").setup(require("configs.comment-config"))
 		end,
 	})
 
@@ -159,7 +146,7 @@ return require("packer").startup(function(use)
 		"nvim-tree/nvim-web-devicons",
 
 		config = function()
-			require("nvim-web-devicons").setup(require("configs.web-devicons-conf"))
+			require("nvim-web-devicons").setup(require("configs.web-devicons-config"))
 		end,
 	})
 
@@ -167,7 +154,7 @@ return require("packer").startup(function(use)
 		"nvim-lualine/lualine.nvim",
 
 		config = function()
-			require("lualine").setup(require("configs.lualine-conf"))
+			require("lualine").setup(require("configs.lualine-config"))
 		end,
 	})
 
@@ -175,7 +162,7 @@ return require("packer").startup(function(use)
 		"prichrd/netrw.nvim",
 
 		config = function()
-			require("netrw").setup(require("configs.netrw-conf"))
+			require("netrw").setup(require("configs.netrw-config"))
 		end,
 	})
 
@@ -198,7 +185,7 @@ return require("packer").startup(function(use)
 		tag = "*",
 
 		config = function()
-			require("nvim-surround").setup(require("configs.surround-conf"))
+			require("nvim-surround").setup(require("configs.surround-config"))
 		end,
 	})
 
@@ -210,7 +197,7 @@ return require("packer").startup(function(use)
 
 			vim.keymap.set("n", "<leader>nf", startup.new_file)
 
-			startup.setup(require("configs.startup-conf"))
+			startup.setup(require("configs.startup-config"))
 		end,
 	})
 end)

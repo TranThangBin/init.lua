@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>fe", function()
 	io.close(f)
 
 	local last_search = vim.fn.getreg("/")
-	vim.cmd("Ex | /\\<" .. vim.fn.expand("%:t") .. "\\>")
+	vim.cmd("Ex | /^" .. vim.fn.expand("%:t") .. "$")
 	vim.fn.setreg("/", last_search)
 end)
 
