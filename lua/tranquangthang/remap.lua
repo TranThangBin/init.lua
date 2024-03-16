@@ -29,6 +29,8 @@ vim.keymap.set("n", "<leader>k", ":lprev<CR>zz")
 
 vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
+vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
+
 vim.keymap.set("n", "<leader>fe", function()
 	local f = io.open(vim.api.nvim_buf_get_name(0))
 
@@ -39,9 +41,10 @@ vim.keymap.set("n", "<leader>fe", function()
 
 	io.close(f)
 
+	-- Escaping regex characters
+	local filePattern = vim.fn.expand("%:t"):gsub("([%(%)%.%%%+%-%*%?%[%^%$])", "\\%1")
+
 	local last_search = vim.fn.getreg("/")
-	vim.cmd("Ex | /^" .. vim.fn.expand("%:t") .. "$")
+	vim.cmd("Ex | /^" .. filePattern)
 	vim.fn.setreg("/", last_search)
 end)
-
-vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
