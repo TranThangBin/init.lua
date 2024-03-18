@@ -22,11 +22,6 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
-vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
-vim.keymap.set("n", "<C-k>", ":cprevious<CR>zz")
-vim.keymap.set("n", "<leader>j", ":lnext<CR>zz")
-vim.keymap.set("n", "<leader>k", ":lprev<CR>zz")
-
 vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
 vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
@@ -45,6 +40,6 @@ vim.keymap.set("n", "<leader>fe", function()
 	local filePattern = vim.fn.expand("%:t"):gsub("([%(%)%.%%%+%-%*%?%[%^%$])", "\\%1")
 
 	local last_search = vim.fn.getreg("/")
-	vim.cmd("Ex | /^" .. filePattern)
+	vim.cmd("Ex | /" .. filePattern)
 	vim.fn.setreg("/", last_search)
 end)

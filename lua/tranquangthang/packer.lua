@@ -195,7 +195,7 @@ return require("packer").startup(function(use)
 		config = function()
 			local startup = require("startup")
 
-			vim.keymap.set("n", "<leader>nf", startup.new_file)
+			vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 
 			startup.setup(require("configs.startup-config"))
 		end,

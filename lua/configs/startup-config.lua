@@ -10,7 +10,7 @@ dashboard.header.content = {
 }
 
 dashboard.body.content = {
-	{ "    New File", "lua require'startup'.new_file()", "<leader>nf" },
+	{ "    New Buffer", "enew", "<leader>nb" },
 	{ "🖿    File Explorer", "Explore", "<leader>fe" },
 	{ "☰    Marked Files", 'lua require("harpoon.ui").toggle_quick_menu()', "<leader>hm" },
 	{ "    Git Status", "Git", "<leader>gs" },
