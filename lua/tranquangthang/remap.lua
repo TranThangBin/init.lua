@@ -26,6 +26,8 @@ vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
 vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
 
+vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
+
 vim.keymap.set("n", "<leader>fe", function()
 	local f = io.open(vim.api.nvim_buf_get_name(0))
 

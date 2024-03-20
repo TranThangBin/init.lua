@@ -11,7 +11,6 @@ return require("packer").startup(function(use)
 		"gelguy/wilder.nvim",
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
-		"nvim-treesitter/playground",
 	})
 
 	use({
@@ -71,16 +70,13 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 
+		requires = {
+			"windwp/nvim-ts-autotag",
+			"nvim-treesitter/playground",
+		},
+
 		config = function()
 			require("nvim-treesitter.configs").setup(require("configs.treesitter-config"))
-		end,
-	})
-
-	use({
-		"windwp/nvim-ts-autotag",
-
-		config = function()
-			require("nvim-ts-autotag").setup()
 		end,
 	})
 
@@ -194,8 +190,6 @@ return require("packer").startup(function(use)
 
 		config = function()
 			local startup = require("startup")
-
-			vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 
 			startup.setup(require("configs.startup-config"))
 		end,
