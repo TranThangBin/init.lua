@@ -31,17 +31,20 @@ vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 vim.keymap.set("n", "<leader>fe", function()
 	local f = io.open(vim.api.nvim_buf_get_name(0))
 
+	-- Escaping regex characters
+	local filePattern = vim.fn.expand("%:t"):gsub("([%(%)%.%%%+%-%*%?%[%^%$])", "\\%1")
+
+	vim.cmd.Ex()
+
 	if f == nil then
-		vim.cmd("Ex")
 		return
 	end
 
 	io.close(f)
 
-	-- Escaping regex characters
-	local filePattern = vim.fn.expand("%:t"):gsub("([%(%)%.%%%+%-%*%?%[%^%$])", "\\%1")
-
 	local last_search = vim.fn.getreg("/")
-	vim.cmd("Ex | /" .. filePattern)
+
+	vim.cmd("/" .. filePattern)
+
 	vim.fn.setreg("/", last_search)
 end)
