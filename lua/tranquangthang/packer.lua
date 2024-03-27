@@ -71,8 +71,14 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 
 		requires = {
-			"windwp/nvim-ts-autotag",
 			"nvim-treesitter/playground",
+			{
+				"windwp/nvim-ts-autotag",
+
+				config = function()
+					require("nvim-ts-autotag").setup()
+				end,
+			},
 		},
 
 		config = function()

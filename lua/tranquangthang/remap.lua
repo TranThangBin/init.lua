@@ -29,22 +29,24 @@ vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
 vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 
 vim.keymap.set("n", "<leader>fe", function()
-	local f = io.open(vim.api.nvim_buf_get_name(0))
+	local fileName = vim.fn.expand("%:t")
 
-	-- Escaping regex characters
-	local filePattern = vim.fn.expand("%:t"):gsub("([%(%)%.%%%+%-%*%?%[%^%$])", "\\%1")
-
-	vim.cmd.Ex()
-
-	if f == nil then
-		return
-	end
-
-	io.close(f)
+	local filePattern = fileName
+		:gsub("%(", "\\%(")
+		:gsub("%)", "\\%)")
+		:gsub("%.", "\\%.")
+		:gsub("%%", "\\%%")
+		:gsub("%+", "\\%+")
+		:gsub("%-", "\\%-")
+		:gsub("%*", "\\%*")
+		:gsub("%?", "\\%?")
+		:gsub("%[", "\\%[")
+		:gsub("%^", "\\%^")
+		:gsub("%$", "\\%$")
 
 	local last_search = vim.fn.getreg("/")
 
-	vim.cmd("/" .. filePattern)
+	vim.cmd("Ex|silent!/" .. filePattern)
 
 	vim.fn.setreg("/", last_search)
 end)
