@@ -195,9 +195,7 @@ return require("packer").startup(function(use)
 		"startup-nvim/startup.nvim",
 
 		config = function()
-			local startup = require("startup")
-
-			startup.setup(require("configs.startup-config"))
+			require("startup").setup(require("configs.startup-config"))
 		end,
 	})
 end)
