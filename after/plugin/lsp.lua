@@ -120,10 +120,12 @@ if ok then
 			completion = cmp.config.window.bordered(),
 			documentation = cmp.config.window.bordered(),
 		},
+
 		preselect = "item",
 		completion = {
 			completeopt = "menu,menuone,noinsert",
 		},
+
 		sources = sources,
 		formatting = lsp_zero.cmp_format(),
 	})
