@@ -135,7 +135,11 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
 
 			-- Snippets
-			{ "L3MON4D3/LuaSnip" }, -- Required
+			{
+				"L3MON4D3/LuaSnip",
+
+				run = "make install_jsregexp",
+			}, -- Required
 			{ "rafamadriz/friendly-snippets" }, -- Optional
 		},
 	})
@@ -175,14 +179,14 @@ return require("packer").startup(function(use)
 	use({
 		"ThePrimeagen/vim-apm",
 
-		-- config = function()
-		-- 	local apm = require("vim-apm")
-		--
-		-- 	apm:setup({})
-		-- 	vim.keymap.set("n", "<leader>apm", function()
-		-- 		apm:toggle_monitor()
-		-- 	end)
-		-- end,
+		config = function()
+			local apm = require("vim-apm")
+
+			apm:setup({})
+			vim.keymap.set("n", "<leader>apm", function()
+				apm:toggle_monitor()
+			end)
+		end,
 	})
 
 	use({
