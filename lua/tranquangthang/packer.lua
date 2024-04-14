@@ -176,18 +176,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"ThePrimeagen/vim-apm",
-
-		config = function()
-			local apm = require("vim-apm")
-
-			apm:setup({})
-			vim.keymap.set("n", "<leader>apm", function()
-				apm:toggle_monitor()
-			end)
-		end,
-	})
+	-- use({
+	-- 	"ThePrimeagen/vim-apm",
+	--
+	-- 	config = function()
+	-- 		local apm = require("vim-apm")
+	--
+	-- 		apm:setup({})
+	-- 		vim.keymap.set("n", "<leader>apm", function()
+	-- 			apm:toggle_monitor()
+	-- 		end)
+	-- 	end,
+	-- })
 
 	use({
 		"kylechui/nvim-surround",
