@@ -27,6 +27,8 @@ if ok then
 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 	vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 	vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
+	vim.keymap.set("n", "<leader>rs", builtin.resume, {})
+
 	vim.keymap.set("n", "<leader>ps", function()
 		builtin.grep_string({ search = vim.fn.input("Grep > ") })
 	end)

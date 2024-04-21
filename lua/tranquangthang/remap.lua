@@ -16,9 +16,13 @@ vim.keymap.set("x", "N", "Nzzzv")
 -- x = visual, v = visual and select
 vim.keymap.set({ "n", "x" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "x" }, "<leader>Y", '"+Y')
-
 vim.keymap.set("x", "<leader>d", '"_d')
 vim.keymap.set("x", "<leader>p", '"_dP')
+
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<A-k>", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<A-j>", "<cmd>lnext<CR>zz")
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
