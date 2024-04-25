@@ -40,7 +40,6 @@ vim.keymap.set("n", "<leader>fe", function()
 		:gsub("%(", "\\%(")
 		:gsub("%)", "\\%)")
 		:gsub("%.", "\\%.")
-		:gsub("%%", "\\%%")
 		:gsub("%+", "\\%+")
 		:gsub("%-", "\\%-")
 		:gsub("%*", "\\%*")
@@ -48,6 +47,8 @@ vim.keymap.set("n", "<leader>fe", function()
 		:gsub("%[", "\\%[")
 		:gsub("%^", "\\%^")
 		:gsub("%$", "\\%$")
+
+	filePattern = "^" .. filePattern .. "$"
 
 	local last_search = vim.fn.getreg("/")
 
