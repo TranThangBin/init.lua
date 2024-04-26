@@ -1,8 +1,8 @@
 return {
 	"mhartington/formatter.nvim",
 
-	config = function()
-		require("formatter").setup({
+	opts = function()
+		return {
 			logging = true,
 			log_level = vim.log.levels.WARN,
 			filetype = {
@@ -28,8 +28,11 @@ return {
 				},
 				["*"] = { require("formatter.filetypes.any").remove_trailing_whitespace },
 			},
-		})
+		}
+	end,
 
+	config = function(_, opts)
+		require("formatter").setup(opts)
 		vim.keymap.set("n", "<leader>fm", vim.cmd.Format)
 	end,
 }

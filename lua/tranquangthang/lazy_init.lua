@@ -17,7 +17,7 @@ require("lazy").setup({
 	ui = {
 		size = { width = 0.8, height = 0.8 },
 		wrap = true,
-		border = "none",
+		border = "single",
 		backdrop = 60,
 		title = nil,
 		title_pos = "center",
