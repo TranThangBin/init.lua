@@ -9,7 +9,7 @@ return {
 	},
 
 	opts = function()
-		local open_with_trouble = require("trouble.providers.telescope")
+		local open_with_trouble = require("trouble.providers.telescope").open_with_trouble
 
 		local normal_mapping = {
 			q = require("telescope.actions").close,

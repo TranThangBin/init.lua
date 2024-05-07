@@ -65,28 +65,36 @@ return {
 	},
 
 	config = function()
-		local trouble_toggle = require("trouble").toggle
+		local trouble = require("trouble")
 
-		vim.keymap.set("n", "<leader>xx", trouble_toggle)
+		vim.keymap.set("n", "<leader>xx", trouble.toggle)
 
 		vim.keymap.set("n", "<leader>xw", function()
-			trouble_toggle("workspace_diagnostics")
+			trouble.toggle("workspace_diagnostics")
 		end)
 
 		vim.keymap.set("n", "<leader>xd", function()
-			trouble_toggle("document_diagnostics")
+			trouble.toggle("document_diagnostics")
 		end)
 
 		vim.keymap.set("n", "<leader>xq", function()
-			trouble_toggle("quickfix")
+			trouble.toggle("quickfix")
 		end)
 
 		vim.keymap.set("n", "<leader>xl", function()
-			trouble_toggle("loclist")
+			trouble.toggle("loclist")
 		end)
 
 		vim.keymap.set("n", "gR", function()
-			trouble_toggle("lsp_references")
+			trouble.toggle("lsp_references")
+		end)
+
+		vim.keymap.set("n", "[t", function()
+			trouble.next({ skip_groups = true, jump = true })
+		end)
+
+		vim.keymap.set("n", "]t", function()
+			trouble.previous({ skip_groups = true, jump = true })
 		end)
 	end,
 }
