@@ -11,6 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+MyGroup = vim.api.nvim_create_augroup("tranquangthang", {})
+
 require("lazy").setup({
 	spec = "tranquangthang.lazy",
 	change_detection = { notify = false },
