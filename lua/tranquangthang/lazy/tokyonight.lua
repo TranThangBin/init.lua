@@ -11,8 +11,8 @@ return {
 		transparent = true,
 		terminal_colors = true,
 		styles = {
-			comments = { italic = true },
-			keywords = { italic = true },
+			comments = { italic = false },
+			keywords = { italic = false },
 			functions = {},
 			variables = {},
 			sidebars = "dark",
