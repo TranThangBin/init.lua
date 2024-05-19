@@ -11,9 +11,7 @@ return {
 	opts = function()
 		local open_with_trouble = require("trouble.providers.telescope").open_with_trouble
 
-		local normal_mapping = {
-			q = require("telescope.actions").close,
-		}
+		local normal_mapping = { q = require("telescope.actions").close }
 		local insert_mapping = {}
 
 		local mappings = {
@@ -41,9 +39,6 @@ return {
 		vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 		vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
 		vim.keymap.set("n", "<leader>rs", builtin.resume, {})
-		vim.keymap.set("n", "<leader>ps", function()
-			builtin.grep_string({ search = vim.fn.input("Grep > ") })
-		end)
 
 		require("telescope").setup(opts)
 	end,
