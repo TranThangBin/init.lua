@@ -44,6 +44,7 @@ return {
 	end,
 
 	config = function()
+		--- @type function
 		local zen_mode_toggle = require("zen-mode").toggle
 
 		vim.keymap.set("n", "<leader>zz", zen_mode_toggle)

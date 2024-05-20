@@ -12,8 +12,6 @@ return {
 	config = function()
 		local lsp_zero = require("lsp-zero")
 
-		lsp_zero.preset("recommended")
-
 		require("mason").setup({
 			ui = {
 				border = "single",
@@ -27,10 +25,9 @@ return {
 		})
 
 		require("mason-lspconfig").setup({
+			ensure_installed = { "lua_ls" },
 			handlers = {
 				lsp_zero.default_setup,
-				eslint = lsp_zero.noop,
-				ltex = lsp_zero.noop,
 				lua_ls = function()
 					local lua_opts = lsp_zero.nvim_lua_ls()
 					require("lspconfig").lua_ls.setup(lua_opts)
@@ -39,7 +36,7 @@ return {
 		})
 
 		vim.diagnostic.config({
-			virtual_text = false,
+			virtual_text = true,
 			severity_sort = true,
 			float = {
 				style = "minimal",

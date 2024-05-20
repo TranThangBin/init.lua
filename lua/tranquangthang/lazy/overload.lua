@@ -46,7 +46,9 @@ return {
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, remap_opts)
 			vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, remap_opts)
 			vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, remap_opts)
-			vim.keymap.set("n", "<leader>fl", vim.lsp.buf.format, remap_opts)
+			vim.keymap.set("n", "<leader>fl", function()
+				vim.lsp.buf.format({ async = true })
+			end, remap_opts)
 
 			if client.server_capabilities.signatureHelpProvider then
 				require("lsp-overloads").setup(client, opts)
