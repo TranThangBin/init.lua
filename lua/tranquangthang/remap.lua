@@ -33,7 +33,7 @@ vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
 vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 
 -- nice
-vim.keymap.set("n", "<leader>fe", function()
+vim.keymap.set("n", "<leader>e", function()
 	local fileName = vim.fn.expand("%:t")
 
 	local filePattern = fileName

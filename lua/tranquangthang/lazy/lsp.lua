@@ -5,8 +5,8 @@ return {
 
 	dependencies = {
 		"neovim/nvim-lspconfig",
-		"williamboman/mason-lspconfig.nvim",
 		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
 	},
 
 	config = function()
@@ -53,7 +53,5 @@ return {
 			hint = "⚑",
 			info = "»",
 		})
-
-		lsp_zero.setup()
 	end,
 }

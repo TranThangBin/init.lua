@@ -4,8 +4,8 @@ return {
 	branch = "0.1.x",
 
 	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-		{ "folke/trouble.nvim" },
+		"nvim-lua/plenary.nvim",
+		"folke/trouble.nvim",
 	},
 
 	opts = function()
@@ -32,10 +32,10 @@ return {
 	config = function(_, opts)
 		local builtin = require("telescope.builtin")
 
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-		vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+		vim.keymap.set("n", "<leader>tf", builtin.find_files, {})
+		vim.keymap.set("n", "<leader>tg", builtin.git_files, {})
+		vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
+		vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 		vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
 		vim.keymap.set("n", "<leader>rs", builtin.resume, {})
