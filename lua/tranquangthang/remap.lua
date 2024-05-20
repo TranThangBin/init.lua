@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 
+vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
 vim.keymap.set({ "s", "i" }, "jj", "<Esc>")
 
 vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")

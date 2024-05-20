@@ -18,7 +18,7 @@ local user = os.getenv("HOME") or os.getenv("USERPROFILE")
 vim.opt.undodir = user .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true

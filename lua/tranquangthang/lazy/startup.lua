@@ -29,7 +29,6 @@ return {
 		dashboard.body.content = {
 			{ "    New Buffer", "enew", "<leader>nb" },
 			{ "🖿    File Explorer", "Explore", "<leader>e" },
-			{ "☰    Marked Files", "lua require('harpoon').ui:toggle_quick_menu(harpoon:list())", "<leader>hm" },
 			{ "    Git Status", "Git", "<leader>gs" },
 			{ "    Find File", "Telescope find_files", "<leader>tf" },
 			{ "󰍉    Find Word", "Telescope live_grep", "<leader>lg" },
