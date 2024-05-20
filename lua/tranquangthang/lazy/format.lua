@@ -8,10 +8,13 @@ return {
 		"nvimtools/none-ls.nvim",
 	},
 
-	opts = function()
-		return {
-			ensure_installed = { "stylua" },
-			handlers = {},
-		}
+	opts = {
+		ensure_installed = { "stylua" },
+		handlers = {},
+	},
+
+	config = function(_, opts)
+		require("null-ls").setup()
+		require("mason-null-ls").setup(opts)
 	end,
 }
