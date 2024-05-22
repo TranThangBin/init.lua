@@ -7,10 +7,13 @@ return {
 		"neovim/nvim-lspconfig",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
+		"b0o/schemastore.nvim",
 	},
 
 	config = function()
 		local lsp_zero = require("lsp-zero")
+		local lspconfig = require("lspconfig")
+		local schemastore = require("schemastore")
 
 		require("mason").setup({
 			ui = {
@@ -30,7 +33,28 @@ return {
 				lsp_zero.default_setup,
 				lua_ls = function()
 					local lua_opts = lsp_zero.nvim_lua_ls()
-					require("lspconfig").lua_ls.setup(lua_opts)
+					lspconfig.lua_ls.setup(lua_opts)
+				end,
+				jsonls = function()
+					lspconfig.jsonls.setup({
+						settings = {
+							json = {
+								schemas = schemastore.json.schemas(),
+								validate = { enable = true },
+							},
+						},
+					})
+				end,
+				yamlls = function()
+					lspconfig.yamlls.setup({
+						yaml = {
+							schemas = schemastore.yaml.schemas(),
+							schemaStore = {
+								enable = false,
+								url = "",
+							},
+						},
+					})
 				end,
 			},
 		})
