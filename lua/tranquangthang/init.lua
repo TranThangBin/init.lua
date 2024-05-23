@@ -11,4 +11,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("VimLeave", {
+	group = my_group,
+	callback = function()
+		if os.getenv("TMUX") then
+			os.execute("tmux set status on")
+		end
+	end,
+})
+
 require("tranquangthang.lazy_init")
