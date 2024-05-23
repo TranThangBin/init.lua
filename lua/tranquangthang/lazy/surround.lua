@@ -1,9 +1,9 @@
 return {
-    "kylechui/nvim-surround",
+	"kylechui/nvim-surround",
 
-    version = "*",
+	version = "*",
 
-    event = "VeryLazy",
+	event = "VeryLazy",
 
 	opts = {
 		keymaps = {

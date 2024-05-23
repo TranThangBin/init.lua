@@ -57,13 +57,14 @@ return {
 				completeopt = "menu,menuone,noinsert",
 			},
 
-			sources = {
+			sources = cmp.config.sources({
 				{ name = "path" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
-				{ name = "buffer", keyword_length = 3 },
-				{ name = "luasnip", keyword_length = 2 },
-			},
+				{ name = "luasnip" },
+			}, {
+				{ name = "buffer" },
+			}),
 		}
 	end,
 
@@ -87,6 +88,7 @@ return {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
 				{ name = "path" },
+			}, {
 				{ name = "cmdline" },
 			}),
 			matching = { disallow_symbol_nonprefix_matching = false },

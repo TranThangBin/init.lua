@@ -15,8 +15,4 @@ return {
 		ensure_installed = { "stylua" },
 		handlers = {},
 	},
-
-	config = function(_, opts)
-		require("mason-null-ls").setup(opts)
-	end,
 }
