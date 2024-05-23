@@ -3,10 +3,6 @@ return {
 
 	name = "rose-pine",
 
-	lazy = false,
-
-	priority = 1000,
-
 	opts = {
 		variant = "auto",
 		dark_variant = "main",

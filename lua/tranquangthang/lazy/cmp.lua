@@ -6,9 +6,9 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-nvim-lua",
+		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 		{
 			"L3MON4D3/LuaSnip",
@@ -24,7 +24,7 @@ return {
 
 		return {
 			preselect = "item",
-			formatting = lsp_zero.cmp_format(),
+			formatting = lsp_zero.cmp_format({ details = true }),
 
 			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -68,10 +68,11 @@ return {
 	end,
 
 	config = function(_, opts)
-		local cmp = require("cmp")
-
 		require("luasnip.loaders.from_vscode").lazy_load()
+
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+		local cmp = require("cmp")
 
 		cmp.setup(opts)
 

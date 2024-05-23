@@ -29,12 +29,15 @@ return {
 
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls" },
+
 			handlers = {
 				lsp_zero.default_setup,
+
 				lua_ls = function()
 					local lua_opts = lsp_zero.nvim_lua_ls()
 					lspconfig.lua_ls.setup(lua_opts)
 				end,
+
 				jsonls = function()
 					lspconfig.jsonls.setup({
 						settings = {
@@ -45,6 +48,7 @@ return {
 						},
 					})
 				end,
+
 				yamlls = function()
 					lspconfig.yamlls.setup({
 						yaml = {

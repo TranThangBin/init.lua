@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 
 vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
-vim.keymap.set("n", "<leader>w", ":set wrap!<CR>")
+vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>")
 
 vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
 
