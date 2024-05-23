@@ -8,8 +8,8 @@ return {
 
         return {
             window = {
-                backdrop = 95,
-                width = 0.9,
+                backdrop = 0.95,
+                width = 90,
                 height = 1,
                 options = {},
             },

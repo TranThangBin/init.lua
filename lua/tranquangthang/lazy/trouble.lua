@@ -64,8 +64,10 @@ return {
 		use_diagnostic_signs = false,
 	},
 
-	config = function()
+	config = function(_, opts)
 		local trouble = require("trouble")
+
+		trouble.setup(opts)
 
 		vim.keymap.set("n", "<leader>xx", trouble.toggle)
 
