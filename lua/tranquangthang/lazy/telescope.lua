@@ -36,6 +36,7 @@ return {
 		vim.keymap.set("n", "<leader>tg", builtin.git_files, {})
 		vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
 		vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
+		vim.keymap.set("n", "<leader>tk", builtin.keymaps, {})
 		vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 		vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
 		vim.keymap.set("n", "<leader>rs", builtin.resume, {})

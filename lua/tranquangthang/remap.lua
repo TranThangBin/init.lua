@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
 vim.keymap.set({ "s", "i" }, "jj", "<Esc>")
 
 vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")
@@ -29,31 +28,13 @@ vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>
 
 vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
-vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>")
-
-vim.keymap.set("n", "<leader>nb", vim.cmd.enew)
-
 -- nice
 vim.keymap.set("n", "<leader>e", function()
-	local fileName = vim.fn.expand("%:t")
+    local filePattern = "^" .. vim.fn.escape(vim.fn.expand("%:t"), "^$.*?/\\[]~^") .. [[\(@|*\)\?\>]]
 
-	local filePattern = fileName
-		:gsub("%(", "\\%(")
-		:gsub("%)", "\\%)")
-		:gsub("%.", "\\%.")
-		:gsub("%+", "\\%+")
-		:gsub("%-", "\\%-")
-		:gsub("%*", "\\%*")
-		:gsub("%?", "\\%?")
-		:gsub("%[", "\\%[")
-		:gsub("%^", "\\%^")
-		:gsub("%$", "\\%$")
+    local last_search = vim.fn.getreg("/")
 
-	filePattern = "^" .. filePattern .. "$"
+    vim.cmd("Ex|silent!/" .. filePattern)
 
-	local last_search = vim.fn.getreg("/")
-
-	vim.cmd("Ex|silent!/" .. filePattern)
-
-	vim.fn.setreg("/", last_search)
+    vim.fn.setreg("/", last_search)
 end)
