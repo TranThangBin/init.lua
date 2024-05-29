@@ -11,6 +11,8 @@ return {
 	},
 
 	config = function()
+		require("lspconfig.ui.windows").default_options.border = "single"
+
 		local lsp_zero = require("lsp-zero")
 		local lspconfig = require("lspconfig")
 		local schemastore = require("schemastore")
