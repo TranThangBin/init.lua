@@ -7,28 +7,29 @@ return {
 
 	config = function()
 		local harpoon = require("harpoon")
+		local list = harpoon:list()
 
 		harpoon:setup()
 
 		vim.keymap.set("n", "<leader>a", function()
-			harpoon:list():add()
+			list:add()
 		end)
 
 		vim.keymap.set("n", "<leader>m", function()
-			harpoon.ui:toggle_quick_menu(harpoon:list())
+			harpoon.ui:toggle_quick_menu(list)
 		end)
 
 		vim.keymap.set("n", "<leader>j", function()
-			harpoon:list():next()
+			list:next()
 		end)
 
 		vim.keymap.set("n", "<leader>k", function()
-			harpoon:list():prev()
+			list:prev()
 		end)
 
 		for i = 1, 5 do
 			vim.keymap.set("n", "<leader>" .. i, function()
-				harpoon:list():select(i)
+				list:select(i)
 			end)
 		end
 	end,

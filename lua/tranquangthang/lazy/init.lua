@@ -32,4 +32,17 @@ return {
 			vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 		end,
 	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"folke/trouble.nvim",
+		},
+		config = function()
+			require("todo-comments").setup()
+			vim.keymap.set("n", "ttf", vim.cmd.TodoTelescope)
+			vim.keymap.set("n", "txx", vim.cmd.TodoTrouble)
+		end,
+	},
 }
