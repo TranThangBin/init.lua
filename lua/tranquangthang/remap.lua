@@ -30,11 +30,11 @@ vim.keymap.set("n", "<leader><leader>", vim.cmd.so)
 
 -- nice
 vim.keymap.set("n", "<leader>e", function()
-    local filePattern = "^" .. vim.fn.escape(vim.fn.expand("%:t"), "^$.*?/\\[]~^") .. [[\(@|*\)\?\>]]
+	local filePattern = "^" .. vim.fn.escape(vim.fn.expand("%:t"), "^$.*?/\\[]~^") .. [[\(@|*\)\?\>]]
 
-    local last_search = vim.fn.getreg("/")
+	local last_search = vim.fn.getreg("/")
 
-    vim.cmd("Ex|silent!/" .. filePattern)
+	vim.cmd("Ex|silent!/" .. filePattern)
 
-    vim.fn.setreg("/", last_search)
+	vim.fn.setreg("/", last_search)
 end)
