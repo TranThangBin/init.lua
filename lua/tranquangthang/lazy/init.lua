@@ -1,13 +1,17 @@
 return {
 	"nvim-lua/plenary.nvim",
 	{
-		"nvim-treesitter/playground",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
-	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("treesitter-context").setup({ enable = false })
+			vim.keymap.set("n", "<leader>ct", vim.cmd.TSContextToggle)
+		end,
 	},
 	{
 		"windwp/nvim-autopairs",
