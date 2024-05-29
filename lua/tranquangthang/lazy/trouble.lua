@@ -91,11 +91,11 @@ return {
 			trouble.toggle("lsp_references")
 		end)
 
-		vim.keymap.set("n", "[t", function()
+		vim.keymap.set("n", "]t", function()
 			trouble.next({ skip_groups = true, jump = true })
 		end)
 
-		vim.keymap.set("n", "]t", function()
+		vim.keymap.set("n", "[t", function()
 			trouble.previous({ skip_groups = true, jump = true })
 		end)
 	end,

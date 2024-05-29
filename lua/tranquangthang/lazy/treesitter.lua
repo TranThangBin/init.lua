@@ -41,10 +41,33 @@ return {
 					["ic"] = "@class.inner",
 				},
 			},
+			swap = {
+				enable = true,
+				swap_next = {
+					["<leader>sl"] = "@parameter.inner",
+				},
+				swap_previous = {
+					["<leader>sh"] = "@parameter.inner",
+				},
+			},
+			move = {
+				enable = true,
+				set_jumps = true,
+				goto_next = {
+					["]f"] = "@function.outer",
+					["]c"] = "@class.outer",
+					["]p"] = "@parameter.outer",
+				},
+				goto_previous = {
+					["[f"] = "@function.outer",
+					["[c"] = "@class.outer",
+					["[p"] = "@parameter.outer",
+				},
+			},
 		},
 	},
 
 	config = function(_, opts)
-        require("nvim-treesitter.configs").setup(opts)
+		require("nvim-treesitter.configs").setup(opts)
 	end,
 }
