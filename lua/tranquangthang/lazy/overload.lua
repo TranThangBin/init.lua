@@ -47,7 +47,7 @@ return {
 			map("n", "gr", builtin.lsp_references, { desc = "[g]o [t]o references" })
 			map("n", "<leader>ws", builtin.lsp_workspace_symbols, { desc = "[w]ork space [s]ymbols" })
 			map("n", "<leader>ds", builtin.lsp_document_symbols, { desc = "[d]ocument [s]ymbols" })
-            map("n", "K", vim.lsp.buf.hover, { desc = "hover" })
+			map("n", "K", vim.lsp.buf.hover, { desc = "hover" })
 			map("n", "<leader>vd", vim.diagnostic.open_float, { desc = "[v]isual [d]iagnostic" })
 			map("n", "]d", vim.diagnostic.goto_next, { desc = "jump to next diagnostic" })
 			map("n", "[d", vim.diagnostic.goto_prev, { desc = "jump to previous diagnostic" })
