@@ -10,7 +10,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("treesitter-context").setup({ enable = false })
-			vim.keymap.set("n", "<leader>ct", vim.cmd.TSContextToggle)
+			vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<CR>")
 		end,
 	},
 	{
@@ -21,7 +21,7 @@ return {
 	{
 		"mbbill/undotree",
 		config = function()
-			vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 		end,
 	},
 	{
@@ -41,8 +41,8 @@ return {
 		},
 		config = function()
 			require("todo-comments").setup()
-			vim.keymap.set("n", "ttf", vim.cmd.TodoTelescope)
-			vim.keymap.set("n", "txx", vim.cmd.TodoTrouble)
+			vim.keymap.set("n", "ttf", "<cmd>TodoTelescope<CR>")
+			vim.keymap.set("n", "txx", "<cmd>TodoTrouble<CR>")
 		end,
 	},
 }
