@@ -85,14 +85,24 @@ return {
 			map("n", "<leader>hb", function()
 				gitsigns.blame_line({ full = true })
 			end, { desc = "[h]unk [b]lame line" })
-			map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[t]oggle [b]lame on line" })
+			map(
+				"n",
+				"<leader>tb",
+				gitsigns.toggle_current_line_blame,
+				{ desc = "[t]oggle [b]lame on line" }
+			)
 			map("n", "<leader>hd", gitsigns.diffthis, { desc = "[h]unk [d]iff this" })
 			map("n", "<leader>hD", function()
 				gitsigns.diffthis("~")
 			end, { desc = "[h]unk [D]iff this by USER" })
 			map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "[t]oggle [d]elete" })
 
-			map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "select the hunk under the cursor" })
+			map(
+				{ "o", "x" },
+				"ih",
+				":<C-U>Gitsigns select_hunk<CR>",
+				{ desc = "select the hunk under the cursor" }
+			)
 		end,
 	},
 
