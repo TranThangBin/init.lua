@@ -45,7 +45,12 @@ return {
 
 			map("n", "gd", builtin.lsp_definitions, { desc = "[g]o [t]o definition" })
 			map("n", "gr", builtin.lsp_references, { desc = "[g]o [t]o references" })
-			map("n", "<leader>ws", builtin.lsp_workspace_symbols, { desc = "[w]ork space [s]ymbols" })
+			map(
+				"n",
+				"<leader>ws",
+				builtin.lsp_workspace_symbols,
+				{ desc = "[w]ork space [s]ymbols" }
+			)
 			map("n", "<leader>ds", builtin.lsp_document_symbols, { desc = "[d]ocument [s]ymbols" })
 			map("n", "K", vim.lsp.buf.hover, { desc = "hover" })
 			map("n", "<leader>vd", vim.diagnostic.open_float, { desc = "[v]isual [d]iagnostic" })
@@ -59,7 +64,12 @@ return {
 
 			if client.server_capabilities.signatureHelpProvider then
 				require("lsp-overloads").setup(client, opts)
-				vim.keymap.set({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature, { desc = "overload signature" })
+				vim.keymap.set(
+					{ "n", "i" },
+					"<A-s>",
+					vim.cmd.LspOverloadsSignature,
+					{ desc = "overload signature" }
+				)
 			end
 		end)
 	end,
