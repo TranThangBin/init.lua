@@ -50,7 +50,12 @@ return {
 
 		zen_mode.setup(opts)
 
-		vim.keymap.set("n", "<leader>zz", zen_mode.toggle, { desc = "zen-mode: toggle zen-mode with settings option" })
+		vim.keymap.set(
+			"n",
+			"<leader>zz",
+			zen_mode.toggle,
+			{ desc = "zen-mode: toggle zen-mode with settings option" }
+		)
 		vim.keymap.set("n", "<leader>zZ", function()
 			zen_mode.toggle({
 				window = {

@@ -57,12 +57,12 @@ return {
 				goto_next = {
 					["]f"] = "@function.outer",
 					["]c"] = "@class.outer",
-					["]p"] = "@parameter.outer",
+					["]a"] = "@parameter.outer",
 				},
 				goto_previous = {
 					["[f"] = "@function.outer",
 					["[c"] = "@class.outer",
-					["[p"] = "@parameter.outer",
+					["[a"] = "@parameter.outer",
 				},
 			},
 		},
