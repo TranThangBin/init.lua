@@ -70,18 +70,48 @@ return {
 			end, { desc = "jump to the previous hunk" })
 
 			-- Actions
-			map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "[h]unk [s]tage" })
-			map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "[h]unk [r]eset" })
+			map(
+				"n",
+				"<leader>hs",
+				gitsigns.stage_hunk,
+				{ desc = "[h]unk [s]tage" }
+			)
+			map(
+				"n",
+				"<leader>hr",
+				gitsigns.reset_hunk,
+				{ desc = "[h]unk [r]eset" }
+			)
 			map("v", "<leader>hs", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { desc = "[h]unk [s]tage current line" })
 			map("v", "<leader>hr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { desc = "[h]unk [r]eset current line" })
-			map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "[h]unk [S]tage buffer" })
-			map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "[h]unk [u]ndo stage" })
-			map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "[h]unk [R]eset buffer" })
-			map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "[h]unk [p]review" })
+			map(
+				"n",
+				"<leader>hS",
+				gitsigns.stage_buffer,
+				{ desc = "[h]unk [S]tage buffer" }
+			)
+			map(
+				"n",
+				"<leader>hu",
+				gitsigns.undo_stage_hunk,
+				{ desc = "[h]unk [u]ndo stage" }
+			)
+			map(
+				"n",
+				"<leader>hR",
+				gitsigns.reset_buffer,
+				{ desc = "[h]unk [R]eset buffer" }
+			)
+			map(
+				"n",
+				"<leader>hp",
+				gitsigns.preview_hunk,
+				{ desc = "[h]unk [p]review" }
+			)
 			map("n", "<leader>hb", function()
 				gitsigns.blame_line({ full = true })
 			end, { desc = "[h]unk [b]lame line" })
@@ -91,11 +121,21 @@ return {
 				gitsigns.toggle_current_line_blame,
 				{ desc = "[t]oggle [b]lame on line" }
 			)
-			map("n", "<leader>hd", gitsigns.diffthis, { desc = "[h]unk [d]iff this" })
+			map(
+				"n",
+				"<leader>hd",
+				gitsigns.diffthis,
+				{ desc = "[h]unk [d]iff this" }
+			)
 			map("n", "<leader>hD", function()
 				gitsigns.diffthis("~")
 			end, { desc = "[h]unk [D]iff this by USER" })
-			map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "[t]oggle [d]elete" })
+			map(
+				"n",
+				"<leader>td",
+				gitsigns.toggle_deleted,
+				{ desc = "[t]oggle [d]elete" }
+			)
 
 			map(
 				{ "o", "x" },

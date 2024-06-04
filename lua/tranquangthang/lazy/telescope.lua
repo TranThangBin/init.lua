@@ -42,9 +42,24 @@ return {
 			builtin.keymaps,
 			{ desc = "Telescope: [t]elescope [k]eymaps" }
 		)
-		vim.keymap.set("n", "<leader>lg", builtin.live_grep, { desc = "Telescope: [l]ive [g]rep" })
-		vim.keymap.set("n", "<leader>of", builtin.oldfiles, { desc = "Telescope: [o]ld [f]iles" })
-		vim.keymap.set("n", "<leader>rs", builtin.resume, { desc = "Telescope: [r]e[s]ume" })
+		vim.keymap.set(
+			"n",
+			"<leader>lg",
+			builtin.live_grep,
+			{ desc = "Telescope: [l]ive [g]rep" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>of",
+			builtin.oldfiles,
+			{ desc = "Telescope: [o]ld [f]iles" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>rs",
+			builtin.resume,
+			{ desc = "Telescope: [r]e[s]ume" }
+		)
 
 		require("telescope").setup(opts)
 	end,

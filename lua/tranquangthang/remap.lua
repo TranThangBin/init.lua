@@ -3,8 +3,18 @@ vim.g.mapleader = " "
 vim.keymap.set({ "s", "i" }, "jj", "<Esc>")
 vim.keymap.set({ "s", "i" }, "jk", "j")
 
-vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv", { desc = "General: move selected line downward" })
-vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { desc = "General: move selected line upward" })
+vim.keymap.set(
+	"x",
+	"J",
+	":m '>+1<CR>gv=gv",
+	{ desc = "General: move selected line downward" }
+)
+vim.keymap.set(
+	"x",
+	"K",
+	":m '<-2<CR>gv=gv",
+	{ desc = "General: move selected line upward" }
+)
 
 vim.keymap.set("n", "J", "mzJ`z")
 
@@ -35,12 +45,21 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader><leader>", "<cmd>so<CR>")
 
 -- nice
-vim.keymap.set("n", "<leader>e", function()
-	local file_pattern = "^" .. "\\V" .. vim.fn.expand("%:t") .. "\\V" .. [[\(@|*\)\?\>]]
+vim.keymap.set(
+	"n",
+	"<leader>e",
+	function()
+		local file_pattern = "^"
+			.. "\\V"
+			.. vim.fn.expand("%:t")
+			.. "\\V"
+			.. [[\(@|*\)\?\>]]
 
-	local last_search = vim.fn.getreg("/")
+		local last_search = vim.fn.getreg("/")
 
-	vim.cmd("Ex|silent!/" .. file_pattern)
+		vim.cmd("Ex|silent!/" .. file_pattern)
 
-	vim.fn.setreg("/", last_search)
-end, { desc = "General: [e]xplore and set the cursor to the file you exit from" })
+		vim.fn.setreg("/", last_search)
+	end,
+	{ desc = "General: [e]xplore and set the cursor to the file you exit from" }
+)
