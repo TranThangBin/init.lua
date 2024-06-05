@@ -23,28 +23,20 @@ return {
 			list:next()
 		end, { desc = "Harpoon: jump to the next buffer in the harpoon list" })
 
-		vim.keymap.set(
-			"n",
-			"<leader>k",
-			function()
-				list:prev()
-			end,
-			{ desc = "Harpoon: jump to the previous buffer in the harpoon list" }
-		)
+		vim.keymap.set("n", "<leader>k", function()
+			list:prev()
+		end, {
+			desc = "Harpoon: jump to the previous buffer in the harpoon list",
+		})
 
 		for i = 1, 5 do
-			vim.keymap.set(
-				"n",
-				"<leader>" .. i,
-				function()
-					list:select(i)
-				end,
-				{
-					desc = "Harpoon: jump to the ["
-						.. i
-						.. "] buffer in the harpoon list",
-				}
-			)
+			vim.keymap.set("n", "<leader>" .. i, function()
+				list:select(i)
+			end, {
+				desc = "Harpoon: jump to the ["
+					.. i
+					.. "] buffer in the harpoon list",
+			})
 		end
 	end,
 }

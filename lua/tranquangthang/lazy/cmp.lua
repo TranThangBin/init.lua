@@ -7,7 +7,7 @@ return {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lua",
+		"folke/lazydev.nvim",
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 		{
@@ -30,7 +30,7 @@ return {
 				["<CR>"] = cmp.mapping.confirm({ select = false }),
 				["<Tab>"] = cmp.mapping.confirm({ select = false }),
 
-				["<C-n>"] = cmp_action.toggle_completion(),
+				["<C-n>"] = cmp_action.toggle_completion({}),
 
 				["<C-j>"] = cmp.mapping.select_next_item(),
 				["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -60,7 +60,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "path" },
 				{ name = "nvim_lsp" },
-				{ name = "nvim_lua" },
+				{ name = "lazydev" },
 				{ name = "luasnip" },
 			}, {
 				{ name = "buffer" },
@@ -91,7 +91,14 @@ return {
 			}, {
 				{ name = "cmdline" },
 			}),
-			matching = { disallow_symbol_nonprefix_matching = false },
+			matching = {
+				disallow_symbol_nonprefix_matching = false,
+				disallow_fuzzy_matching = false,
+				disallow_prefix_unmatching = false,
+				disallow_partial_matching = false,
+				disallow_fullfuzzy_matching = false,
+				disallow_partial_fuzzy_matching = false,
+			},
 		})
 	end,
 }

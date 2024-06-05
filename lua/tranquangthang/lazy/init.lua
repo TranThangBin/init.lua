@@ -1,10 +1,12 @@
 return {
 	"nvim-lua/plenary.nvim",
+
 	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true,
 	},
+
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -13,17 +15,20 @@ return {
 			vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<CR>")
 		end,
 	},
+
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
 	},
+
 	{
 		"mbbill/undotree",
 		config = function()
 			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 		end,
 	},
+
 	{
 		"tpope/vim-fugitive",
 		config = function()
@@ -32,6 +37,7 @@ return {
 			vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 		end,
 	},
+
 	{
 		"folke/todo-comments.nvim",
 		dependencies = {
