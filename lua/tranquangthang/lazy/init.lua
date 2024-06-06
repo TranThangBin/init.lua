@@ -10,10 +10,8 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("treesitter-context").setup({ enable = false })
-			vim.keymap.set("n", "<leader>ct", "<cmd>TSContextToggle<CR>")
-		end,
+		opts = { enable = false },
+		keys = { { "<leader>ct", "<cmd>TSContextToggle<CR>" } },
 	},
 
 	{
@@ -24,18 +22,16 @@ return {
 
 	{
 		"mbbill/undotree",
-		config = function()
-			vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
-		end,
+		keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } },
 	},
 
 	{
 		"tpope/vim-fugitive",
-		config = function()
-			vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-			vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>")
-			vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
-		end,
+		keys = {
+			{ "<leader>gs", "<cmd>Git<CR>" },
+			{ "gh", "<cmd>diffget //2<CR>" },
+			{ "gl", "<cmd>diffget //3<CR>" },
+		},
 	},
 
 	{
@@ -45,10 +41,10 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"folke/trouble.nvim",
 		},
-		config = function()
-			require("todo-comments").setup()
-			vim.keymap.set("n", "ttf", "<cmd>TodoTelescope<CR>")
-			vim.keymap.set("n", "txx", "<cmd>TodoTrouble<CR>")
-		end,
+		keys = {
+			{ "ttf", "<cmd>TodoTelescope<CR>" },
+			{ "txx", "<cmd>TodoTrouble<CR>" },
+		},
+		config = true,
 	},
 }

@@ -45,32 +45,38 @@ return {
 		}
 	end,
 
-	config = function(_, opts)
+	keys = function()
 		local zen_mode = require("zen-mode")
 
-		zen_mode.setup(opts)
+		return {
+			{
+				"<leader>zz",
+				zen_mode.toggle,
+				desc = "zen-mode: toggle zen-mode with settings option",
+			},
 
-		vim.keymap.set(
-			"n",
-			"<leader>zz",
-			zen_mode.toggle,
-			{ desc = "zen-mode: toggle zen-mode with settings option" }
-		)
-		vim.keymap.set("n", "<leader>zZ", function()
-			zen_mode.toggle({
-				window = {
-					width = 85,
-					options = {
-						signcolumn = "no",
-						number = false,
-						relativenumber = false,
-						cursorline = false,
-						cursorcolumn = false,
-						foldcolumn = "0",
-						list = false,
-					},
-				},
-			})
-		end, { desc = "zen-mode: toggle zen-mode with extra zen options" })
+			{
+				"<leader>zZ",
+				function()
+					zen_mode.toggle({
+						window = {
+							width = 85,
+							options = {
+								signcolumn = "no",
+								number = false,
+								relativenumber = false,
+								cursorline = false,
+								cursorcolumn = false,
+								foldcolumn = "0",
+								list = false,
+							},
+						},
+					})
+				end,
+				desc = "zen-mode: toggle zen-mode with extra zen options",
+			},
+		}
 	end,
+
+	config = true,
 }

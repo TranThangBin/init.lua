@@ -5,38 +5,56 @@ return {
 
 	dependencies = { "nvim-lua/plenary.nvim" },
 
-	config = function()
-		local harpoon = require("harpoon")
-		local list = harpoon:list()
+	keys = function()
+		local ui = require("harpoon").ui
+		local list = require("harpoon"):list()
 
-		harpoon:setup()
+		local keys = {
+			{
+				"<leader>a",
+				function()
+					list:add()
+				end,
+				desc = "Harpoon: [a]dd the current buffer to the harpoon list",
+			},
 
-		vim.keymap.set("n", "<leader>a", function()
-			list:add()
-		end, { desc = "Harpoon: [a]dd the current buffer to the harpoon list" })
+			{
+				"<leader>m",
+				function()
+					ui:toggle_quick_menu(list)
+				end,
+				desc = "Harpoon: toggle harpoon [m]enu",
+			},
 
-		vim.keymap.set("n", "<leader>m", function()
-			harpoon.ui:toggle_quick_menu(list)
-		end, { desc = "Harpoon: toggle harpoon [m]enu" })
+			{
+				"<leader>j",
+				function()
+					list:next()
+				end,
+				desc = "Harpoon: jump to the next buffer in the harpoon list",
+			},
 
-		vim.keymap.set("n", "<leader>j", function()
-			list:next()
-		end, { desc = "Harpoon: jump to the next buffer in the harpoon list" })
-
-		vim.keymap.set("n", "<leader>k", function()
-			list:prev()
-		end, {
-			desc = "Harpoon: jump to the previous buffer in the harpoon list",
-		})
+			{
+				"<leader>k",
+				function()
+					list:prev()
+				end,
+				desc = "Harpoon: jump to the previous buffer in the harpoon list",
+			},
+		}
 
 		for i = 1, 5 do
-			vim.keymap.set("n", "<leader>" .. i, function()
-				list:select(i)
-			end, {
+			table.insert(keys, {
+				"<leader>" .. i,
+				function()
+					list:select(i)
+				end,
 				desc = "Harpoon: jump to the ["
 					.. i
 					.. "] buffer in the harpoon list",
 			})
 		end
+
+		return keys
 	end,
 }
