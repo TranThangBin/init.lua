@@ -1,7 +1,10 @@
 return {
 	"nvim-lualine/lualine.nvim",
 
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-lua/lsp-status.nvim",
+	},
 
 	opts = {
 		options = {
@@ -26,7 +29,12 @@ return {
 			lualine_a = { "mode" },
 			lualine_b = { "branch", "diff", "diagnostics" },
 			lualine_c = { "filename" },
-			lualine_x = { "encoding", "fileformat", "filetype" },
+			lualine_x = {
+				"require'lsp-status'.status()",
+				"encoding",
+				"fileformat",
+				"filetype",
+			},
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
 		},
@@ -43,4 +51,9 @@ return {
 		inactive_winbar = {},
 		extensions = {},
 	},
+
+	config = function(_, opts)
+		require("lsp-status").register_progress()
+		require("lualine").setup(opts)
+	end,
 }

@@ -3,7 +3,10 @@ return {
 
 	branch = "0.1.x",
 
-	dependencies = "nvim-lua/plenary.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	},
 
 	opts = function()
 		return {
@@ -12,10 +15,19 @@ return {
 					n = { q = require("telescope.actions").close },
 				},
 			},
+			extensions = {
+				fzf = {
+					fuzzy = true,
+					override_generic_sorter = true,
+					override_file_sorter = true,
+					case_mode = "smart_case",
+				},
+			},
 		}
 	end,
 
 	config = function(_, opts)
+		local telescope = require("telescope")
 		local builtin = require("telescope.builtin")
 
 		vim.keymap.set(
@@ -61,6 +73,7 @@ return {
 			{ desc = "Telescope: [r]e[s]ume" }
 		)
 
-		require("telescope").setup(opts)
+		telescope.setup(opts)
+		telescope.load_extension("fzf")
 	end,
 }
