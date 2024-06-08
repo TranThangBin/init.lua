@@ -83,13 +83,12 @@ return {
 				window = {
 					normal_hl = "Comment",
 					winblend = 0,
-					border = "single",
+					border = "none",
 					zindex = 45,
 					max_width = 0,
 					max_height = 0,
 					x_padding = 1,
-
-					y_padding = 0,
+					y_padding = 1,
 					align = "bottom",
 					relative = "editor",
 				},
@@ -97,10 +96,10 @@ return {
 
 			integration = {
 				["nvim-tree"] = {
-					enable = true,
+					enable = false,
 				},
 				["xcodebuild-nvim"] = {
-					enable = true,
+					enable = false,
 				},
 			},
 

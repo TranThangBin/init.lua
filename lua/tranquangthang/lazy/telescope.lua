@@ -49,6 +49,12 @@ return {
 			},
 
 			{
+				"<leader>tb",
+				builtin.buffers,
+				desc = "Telescope: [t]elescope [b]uffers",
+			},
+
+			{
 				"<leader>lg",
 				builtin.live_grep,
 				desc = "Telescope: [l]ive [g]rep",

@@ -11,6 +11,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = { enable = false },
+        lazy = false,
 		keys = { { "<leader>ct", "<cmd>TSContextToggle<CR>" } },
 	},
 
@@ -27,6 +28,7 @@ return {
 
 	{
 		"tpope/vim-fugitive",
+		lazy = false,
 		keys = {
 			{ "<leader>gs", "<cmd>Git<CR>" },
 			{ "gh", "<cmd>diffget //2<CR>" },

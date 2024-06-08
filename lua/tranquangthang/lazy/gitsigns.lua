@@ -47,7 +47,6 @@ return {
 
 			local function map(mode, l, r, opts)
 				opts = opts or {}
-				opts.desc = "Gitsigns: " .. (opts.desc or "no description")
 				opts.buffer = bufnr
 				vim.keymap.set(mode, l, r, opts)
 			end
@@ -59,7 +58,7 @@ return {
 				else
 					gitsigns.nav_hunk("next")
 				end
-			end, { desc = "jump to the next hunk" })
+			end, { desc = "Gitsigns: jump to the next hunk" })
 
 			map("n", "[g", function()
 				if vim.wo.diff then
@@ -67,81 +66,81 @@ return {
 				else
 					gitsigns.nav_hunk("prev")
 				end
-			end, { desc = "jump to the previous hunk" })
+			end, { desc = "Gitsigns: jump to the previous hunk" })
 
 			-- Actions
 			map(
 				"n",
 				"<leader>hs",
 				gitsigns.stage_hunk,
-				{ desc = "[h]unk [s]tage" }
+				{ desc = "Gitsigns: [h]unk [s]tage" }
 			)
 			map(
 				"n",
 				"<leader>hr",
 				gitsigns.reset_hunk,
-				{ desc = "[h]unk [r]eset" }
+				{ desc = "Gitsigns: [h]unk [r]eset" }
 			)
 			map("v", "<leader>hs", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end, { desc = "[h]unk [s]tage current line" })
+			end, { desc = "Gitsigns: [h]unk [s]tage current line" })
 			map("v", "<leader>hr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end, { desc = "[h]unk [r]eset current line" })
+			end, { desc = "Gitsigns: [h]unk [r]eset current line" })
 			map(
 				"n",
 				"<leader>hS",
 				gitsigns.stage_buffer,
-				{ desc = "[h]unk [S]tage buffer" }
+				{ desc = "Gitsigns: [h]unk [S]tage buffer" }
 			)
 			map(
 				"n",
 				"<leader>hu",
 				gitsigns.undo_stage_hunk,
-				{ desc = "[h]unk [u]ndo stage" }
+				{ desc = "Gitsigns: [h]unk [u]ndo stage" }
 			)
 			map(
 				"n",
 				"<leader>hR",
 				gitsigns.reset_buffer,
-				{ desc = "[h]unk [R]eset buffer" }
+				{ desc = "Gitsigns: [h]unk [R]eset buffer" }
 			)
 			map(
 				"n",
 				"<leader>hp",
 				gitsigns.preview_hunk,
-				{ desc = "[h]unk [p]review" }
+				{ desc = "Gitsigns: [h]unk [p]review" }
 			)
 			map("n", "<leader>hb", function()
 				gitsigns.blame_line({ full = true })
-			end, { desc = "[h]unk [b]lame line" })
+			end, { desc = "Gitsigns: [h]unk [b]lame line" })
 			map(
 				"n",
 				"<leader>tb",
 				gitsigns.toggle_current_line_blame,
-				{ desc = "[t]oggle [b]lame on line" }
+				{ desc = "Gitsigns: [t]oggle [b]lame on line" }
 			)
 			map(
 				"n",
 				"<leader>hd",
 				gitsigns.diffthis,
-				{ desc = "[h]unk [d]iff this" }
+				{ desc = "Gitsigns: [h]unk [d]iff this" }
 			)
 			map("n", "<leader>hD", function()
 				gitsigns.diffthis("~")
-			end, { desc = "[h]unk [D]iff this by USER" })
+			end, { desc = "Gitsigns: [h]unk [D]iff this by USER" })
 			map(
 				"n",
 				"<leader>td",
 				gitsigns.toggle_deleted,
-				{ desc = "[t]oggle [d]elete" }
+				{ desc = "Gitsigns: [t]oggle [d]elete" }
 			)
 
 			map(
 				{ "o", "x" },
 				"ih",
 				":<C-U>Gitsigns select_hunk<CR>",
-				{ desc = "select the hunk under the cursor" }
+				{ desc = "Gitsigns: select the hunk under the cursor" }
 			)
 		end,
 	},
