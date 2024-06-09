@@ -11,7 +11,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = { enable = false },
-        lazy = false,
+		lazy = false,
 		keys = { { "<leader>ct", "<cmd>TSContextToggle<CR>" } },
 	},
 
