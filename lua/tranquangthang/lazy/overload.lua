@@ -67,7 +67,7 @@ return {
 				vim.lsp.buf.format({ async = true })
 			end)
 
-			if client.server_capabilities.signatureHelpProvider then
+			if client.supports_method("signatureHelpProvider") then
 				require("lsp-overloads").setup(client, opts)
 				vim.keymap.set(
 					{ "n", "i" },
