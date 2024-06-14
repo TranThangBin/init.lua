@@ -49,9 +49,9 @@ return {
 			},
 
 			{
-				"<leader>tb",
+				"<leader>bf",
 				builtin.buffers,
-				desc = "Telescope: [t]elescope [b]uffers",
+				desc = "Telescope: [b]u[f]fers",
 			},
 
 			{

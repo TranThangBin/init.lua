@@ -32,8 +32,10 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<A-k>", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<A-j>", "<cmd>lnext<CR>zz")
+
+-- NOTE: conflict with komorebi focus window
+-- vim.keymap.set("n", "<A-k>", "<cmd>lprev<CR>zz")
+-- vim.keymap.set("n", "<A-j>", "<cmd>lnext<CR>zz")
 
 vim.keymap.set(
 	"n",
@@ -50,16 +52,11 @@ vim.keymap.set(
 	"<leader>e",
 	function()
 		local file_pattern = "^"
-			.. "\\V"
-			.. vim.fn.expand("%:t")
-			.. "\\V"
+			.. vim.fn.escape(vim.fn.expand("%:t"), "\\/.*~")
 			.. [[\(@|*\)\?\>]]
 
-		local last_search = vim.fn.getreg("/")
-
-		vim.cmd("Ex|silent!/" .. file_pattern)
-
-		vim.fn.setreg("/", last_search)
+		vim.cmd.Explore()
+		vim.fn.search(file_pattern)
 	end,
 	{ desc = "General: [e]xplore and set the cursor to the file you exit from" }
 )

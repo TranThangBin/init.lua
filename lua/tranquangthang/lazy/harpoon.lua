@@ -27,7 +27,7 @@ return {
 			},
 
 			{
-				"<leader>j",
+				"<C-l>",
 				function()
 					list:next()
 				end,
@@ -35,7 +35,7 @@ return {
 			},
 
 			{
-				"<leader>k",
+				"<C-h>",
 				function()
 					list:prev()
 				end,

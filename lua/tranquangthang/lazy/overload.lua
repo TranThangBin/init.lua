@@ -42,6 +42,7 @@ return {
 					.. (remap_opts.desc or "no description")
 				vim.keymap.set(mode, lhs, rhs, remap_opts)
 			end
+
 			local builtin = require("telescope.builtin")
 
 			map(

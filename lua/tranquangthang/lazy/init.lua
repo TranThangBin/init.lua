@@ -28,7 +28,7 @@ return {
 
 	{
 		"tpope/vim-fugitive",
-		lazy = false,
+		cmd = { "G", "Git" },
 		keys = {
 			{ "<leader>gs", "<cmd>Git<CR>" },
 			{ "gh", "<cmd>diffget //2<CR>" },
@@ -43,10 +43,25 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"folke/trouble.nvim",
 		},
-		keys = {
-			{ "ttf", "<cmd>TodoTelescope<CR>" },
-			{ "txx", "<cmd>TodoTrouble<CR>" },
-		},
+		lazy = false,
+		keys = function()
+			local todo = require("todo-comments")
+
+			return {
+				{ "ttf", "<cmd>TodoTelescope<CR>" },
+				{ "txx", "<cmd>TodoTrouble<CR>" },
+				{
+					"]t",
+					todo.jump_next,
+					desc = "jump to the next todo comment in the buffer",
+				},
+				{
+					"[t",
+					todo.jump_prev,
+					desc = "jump to the previous todo comment in the buffer",
+				},
+			}
+		end,
 		config = true,
 	},
 }
