@@ -15,7 +15,6 @@ return {
 				function()
 					list:add()
 				end,
-				desc = "Harpoon: [a]dd the current buffer to the harpoon list",
 			},
 
 			{
@@ -23,7 +22,6 @@ return {
 				function()
 					ui:toggle_quick_menu(list)
 				end,
-				desc = "Harpoon: toggle harpoon [m]enu",
 			},
 
 			{
@@ -31,7 +29,6 @@ return {
 				function()
 					list:next()
 				end,
-				desc = "Harpoon: jump to the next buffer in the harpoon list",
 			},
 
 			{
@@ -39,7 +36,6 @@ return {
 				function()
 					list:prev()
 				end,
-				desc = "Harpoon: jump to the previous buffer in the harpoon list",
 			},
 		}
 
@@ -49,9 +45,6 @@ return {
 				function()
 					list:select(i)
 				end,
-				desc = "Harpoon: jump to the ["
-					.. i
-					.. "] buffer in the harpoon list",
 			})
 		end
 

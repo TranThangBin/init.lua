@@ -50,16 +50,8 @@ return {
 			return {
 				{ "ttf", "<cmd>TodoTelescope<CR>" },
 				{ "txx", "<cmd>TodoTrouble<CR>" },
-				{
-					"]t",
-					todo.jump_next,
-					desc = "jump to the next todo comment in the buffer",
-				},
-				{
-					"[t",
-					todo.jump_prev,
-					desc = "jump to the previous todo comment in the buffer",
-				},
+				{ "]t", todo.jump_next },
+				{ "[t", todo.jump_prev },
 			}
 		end,
 		config = true,

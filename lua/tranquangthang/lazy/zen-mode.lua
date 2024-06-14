@@ -52,7 +52,6 @@ return {
 			{
 				"<leader>zz",
 				zen_mode.toggle,
-				desc = "zen-mode: toggle zen-mode with settings option",
 			},
 
 			{
@@ -73,7 +72,6 @@ return {
 						},
 					})
 				end,
-				desc = "zen-mode: toggle zen-mode with extra zen options",
 			},
 		}
 	end,

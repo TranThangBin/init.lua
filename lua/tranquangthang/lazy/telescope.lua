@@ -30,47 +30,19 @@ return {
 		local builtin = require("telescope.builtin")
 
 		return {
-			{
-				"<leader>tf",
-				builtin.find_files,
-				desc = "Telescope: [t]elescope [f]iles",
-			},
+			{ "<leader>tf", builtin.find_files },
 
-			{
-				"<leader>tg",
-				builtin.git_files,
-				desc = "Telescope: [t]elescope [g]it files",
-			},
+			{ "<leader>tg", builtin.git_files },
 
-			{
-				"<leader>tk",
-				builtin.keymaps,
-				desc = "Telescope: [t]elescope [k]eymaps",
-			},
+			{ "<leader>tk", builtin.keymaps },
 
-			{
-				"<leader>bf",
-				builtin.buffers,
-				desc = "Telescope: [b]u[f]fers",
-			},
+			{ "<leader>bf", builtin.buffers },
 
-			{
-				"<leader>lg",
-				builtin.live_grep,
-				desc = "Telescope: [l]ive [g]rep",
-			},
+			{ "<leader>lg", builtin.live_grep },
 
-			{
-				"<leader>of",
-				builtin.oldfiles,
-				desc = "Telescope: [o]ld [f]iles",
-			},
+			{ "<leader>of", builtin.oldfiles },
 
-			{
-				"<leader>rs",
-				builtin.resume,
-				desc = "Telescope: [r]e[s]ume",
-			},
+			{ "<leader>rs", builtin.resume },
 		}
 	end,
 
