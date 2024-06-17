@@ -41,7 +41,9 @@ return {
 	},
 
 	config = function(_, opts)
-		require("rose-pine").setup(opts)
-		vim.cmd.colorscheme("rose-pine-moon")
+		local rose_pine = require("rose-pine")
+
+		rose_pine.setup(opts)
+		rose_pine.colorscheme("moon")
 	end,
 }

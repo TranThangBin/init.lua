@@ -11,6 +11,10 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 		{
+			"hrsh7th/cmp-nvim-lua",
+			cond = vim.version.lt(vim.version(), "0.10.0-dev"),
+		},
+		{
 			"L3MON4D3/LuaSnip",
 			build = "make install_jsregexp",
 		},
@@ -60,6 +64,7 @@ return {
 			sources = cmp.config.sources({
 				{ name = "path" },
 				{ name = "nvim_lsp" },
+				{ name = "nvim_lua" },
 				{ name = "lazydev" },
 				{ name = "luasnip" },
 			}, {
