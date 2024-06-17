@@ -1,7 +1,7 @@
 return {
 	"tjdevries/express_line.nvim",
 
-	-- dir = "~/personal/lua/express_line.nvim",
+	dir = "~/personal/lua/express_line.nvim",
 
 	dependencies = { "nvim-tree/nvim-web-devicons", "rose-pine" },
 
@@ -16,6 +16,7 @@ return {
 
 		local get_hl = vim.api.nvim_get_hl
 		local set_hl = vim.api.nvim_set_hl
+		local eval_statusline = vim.api.nvim_eval_statusline
 
 		local statusline_bg = palete.base
 
@@ -36,6 +37,8 @@ return {
 		local opts = {}
 
 		function opts.generator()
+			local line = builtin.line_with_width(3)
+
 			return {
 				extensions.mode,
 				subscribe.buf_autocmd(
@@ -59,8 +62,6 @@ return {
 
 						if changes == nil then
 							return ""
-						elseif changes == "" then
-							return " ✔  "
 						end
 
 						return " ✘ " .. changes
@@ -71,17 +72,26 @@ return {
 				"%f",
 				" ",
 				function(win, buf)
-					local icon, icon_fg =
-						devicons.get_icon_color_by_filetype(buf.extension)
+					local ext = buf.extension
 
-					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", {
-						fg = icon_fg,
+					local icon, color = devicons.get_icon_color_by_filetype(ext)
+
+					local hl = {
+						fg = color,
 						bg = statusline_bg,
-					})
+					}
+
+					if ext == "" then
+						icon = ""
+						hl.fg = ""
+					end
+
+					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", hl)
 
 					local fileicon = sections.highlight({
 						active = "StatusLineFiletypeIcon",
 					}, icon)
+
 					return fileicon(win, buf)
 				end,
 
@@ -116,11 +126,21 @@ return {
 				vim.bo.fileencoding,
 				" ",
 				"[",
-				builtin.percentage_through_file,
-				"%%",
+				function()
+					local percent =
+						eval_statusline(builtin.percentage_through_file, {}).str
+
+					if eval_statusline(line, {}).str == "1  " then
+						return "*TOP"
+					elseif percent == "100" then
+						return "*BOT"
+					end
+
+					return percent .. "%%"
+				end,
 				"]",
 				"[",
-				builtin.line_with_width(3),
+				line,
 				":",
 				builtin.column_with_width(2),
 				"]",
