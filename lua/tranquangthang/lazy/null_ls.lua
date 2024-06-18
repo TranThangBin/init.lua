@@ -28,6 +28,18 @@ return {
 						})
 					)
 				end,
+
+				templ = function()
+					null_ls.register({
+						method = null_ls.methods.FORMATTING,
+						name = "templfmt",
+						filetypes = { "templ" },
+						generator = null_ls.formatter({
+							command = "templ",
+							args = { "fmt", "-stdout", "$FILENAME" },
+						}),
+					})
+				end,
 			},
 		}
 	end,
