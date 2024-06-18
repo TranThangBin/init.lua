@@ -7,7 +7,6 @@ return {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lua",
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 		{
@@ -60,7 +59,6 @@ return {
 			sources = cmp.config.sources({
 				{ name = "path" },
 				{ name = "nvim_lsp" },
-				{ name = "nvim_lua" },
 				{ name = "lazydev" },
 				{ name = "luasnip" },
 			}, {
