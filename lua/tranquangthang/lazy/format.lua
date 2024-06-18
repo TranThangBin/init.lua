@@ -7,6 +7,7 @@ return {
 		"williamboman/mason.nvim",
 		{
 			"nvimtools/none-ls.nvim",
+			opts = { border = "single" },
 			config = true,
 		},
 	},

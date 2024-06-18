@@ -32,7 +32,12 @@ return {
 			set_hl(0, hl_group_name .. "Inactive", { link = "StatusLineNC" })
 		end
 
-		vim.api.nvim_set_hl(0, "StatusLine", { bg = statusline_bg })
+		local precondit_group = get_hl(0, { name = "PreCondit" })
+		set_hl(0, "StatusLineFilePercentage", {
+			fg = precondit_group.fg,
+			bg = statusline_bg,
+		})
+		set_hl(0, "StatusLine", { bg = statusline_bg })
 
 		local opts = {}
 
@@ -72,18 +77,19 @@ return {
 				"%f",
 				" ",
 				function(win, buf)
-					local ext = buf.extension
+					local icon_tbl =
+						devicons.get_icons_by_extension()[buf.extension]
 
-					local icon, color = devicons.get_icon_color_by_filetype(ext)
+					local icon = ""
 
 					local hl = {
-						fg = color,
+						fg = "",
 						bg = statusline_bg,
 					}
 
-					if ext == "" then
-						icon = ""
-						hl.fg = ""
+					if icon_tbl ~= nil then
+						icon = icon_tbl.icon
+						hl.fg = icon_tbl.color
 					end
 
 					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", hl)
@@ -125,20 +131,26 @@ return {
 				" ",
 				vim.bo.fileencoding,
 				" ",
-				"[",
-				function()
+				function(win, buf)
+					local alt_content = ""
 					local percent =
 						eval_statusline(builtin.percentage_through_file, {}).str
 
 					if eval_statusline(line, {}).str == "1  " then
-						return "*TOP"
+						alt_content = "[*TOP]"
 					elseif percent == "100" then
-						return "*BOT"
+						alt_content = "[*BOT]"
 					end
 
-					return percent .. "%%"
+					if alt_content ~= "" then
+						local alt = sections.highlight({
+							active = "StatusLineFilePercentage",
+						}, alt_content)
+						return alt(win, buf)
+					end
+
+					return "[" .. percent .. "%%]"
 				end,
-				"]",
 				"[",
 				line,
 				":",

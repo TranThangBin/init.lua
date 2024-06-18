@@ -19,9 +19,10 @@ return {
 			coq = false,
 		},
 		enabled = function(root_dir)
-			return vim.g.lazydev_enabled == nil and true
+			return (
+				vim.g.lazydev_enabled == nil and true
 				or vim.g.lazydev_enabled
-					and not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+			) and not vim.uv.fs_stat(root_dir .. "/.luarc.json")
 		end,
 	},
 }
