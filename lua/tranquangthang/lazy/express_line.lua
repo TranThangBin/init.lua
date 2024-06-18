@@ -77,22 +77,13 @@ return {
 				"%f",
 				" ",
 				function(win, buf)
-					local icon_tbl =
-						devicons.get_icons_by_extension()[buf.extension]
+					local icon, icon_color =
+						devicons.get_icon_color_by_filetype(buf.extension)
 
-					local icon = ""
-
-					local hl = {
-						fg = "",
+					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", {
+						fg = icon_color,
 						bg = statusline_bg,
-					}
-
-					if icon_tbl ~= nil then
-						icon = icon_tbl.icon
-						hl.fg = icon_tbl.color
-					end
-
-					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", hl)
+					})
 
 					local fileicon = sections.highlight({
 						active = "StatusLineFiletypeIcon",
