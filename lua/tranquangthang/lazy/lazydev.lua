@@ -6,7 +6,8 @@ return {
 		{ "Bilal2453/luvit-meta", lazy = true },
 	},
 
-	cond = vim.version.ge(vim.version(), "0.10.0-dev"),
+	cond = vim.version.ge ~= nil
+		and vim.version.ge(vim.version(), "0.10.0-dev"),
 
 	ft = "lua",
 

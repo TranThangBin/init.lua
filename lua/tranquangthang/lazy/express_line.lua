@@ -41,113 +41,114 @@ return {
 
 		local opts = {}
 
+		local line = builtin.line_with_width(3)
+
+		local segments = {
+			extensions.mode,
+			subscribe.buf_autocmd(
+				"el-git-branch",
+				"BufEnter",
+				function(win, buf)
+					local branch = extensions.git_branch(win, buf)
+
+					if branch == nil then
+						return ""
+					end
+
+					return "  " .. branch
+				end
+			),
+			subscribe.buf_autocmd(
+				"el-git-changes",
+				"BufWritePost",
+				function(win, buf)
+					local changes = extensions.git_changes(win, buf)
+
+					if changes == nil then
+						return ""
+					end
+
+					return " ✘ " .. changes
+				end
+			),
+
+			sections.split,
+			"%f",
+			" ",
+			function(win, buf)
+				local icon_tbl =
+					devicons.get_icons_by_extension()[buf.extension]
+
+				vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", {
+					fg = icon_tbl.color,
+					bg = statusline_bg,
+				})
+
+				local fileicon = sections.highlight({
+					active = "StatusLineFiletypeIcon",
+				}, icon_tbl.icon)
+
+				return fileicon(win, buf)
+			end,
+
+			sections.split,
+			function(win, buf)
+				local ff = vim.bo.fileformat
+				local ff_os = vim.uv.os_uname().sysname:lower()
+
+				if ff == "unix" then
+					ff_os = "linux"
+				elseif ff == "dos" then
+					ff_os = "windows"
+				elseif ff == "mac" then
+					ff_os = "apple"
+				end
+
+				local icon_tbl = devicons.get_icons_by_operating_system()[ff_os]
+
+				vim.api.nvim_set_hl(0, "StatusLineFileformatIcon", {
+					fg = icon_tbl.color,
+					bg = statusline_bg,
+				})
+
+				local icon = sections.highlight({
+					active = "StatusLineFileformatIcon",
+				}, icon_tbl.icon)
+
+				return icon(win, buf)
+			end,
+			" ",
+			vim.bo.fileencoding,
+			" ",
+			function(win, buf)
+				local alt_content = ""
+				local percent =
+					eval_statusline(builtin.percentage_through_file, {}).str
+
+				if eval_statusline(line, {}).str == "1  " then
+					alt_content = "[*TOP]"
+				elseif percent == "100" then
+					alt_content = "[*BOT]"
+				end
+
+				if alt_content ~= "" then
+					local alt = sections.highlight({
+						active = "StatusLineFilePercentage",
+					}, alt_content)
+					return alt(win, buf)
+				end
+
+				return "[" .. percent .. "%%]"
+			end,
+			"[",
+			line,
+			":",
+			builtin.column_with_width(2),
+			"]",
+		}
+
 		function opts.generator()
-			local line = builtin.line_with_width(3)
-
-			return {
-				extensions.mode,
-				subscribe.buf_autocmd(
-					"el-git-branch",
-					"BufEnter",
-					function(win, buf)
-						local branch = extensions.git_branch(win, buf)
-
-						if branch == nil then
-							return ""
-						end
-
-						return "  " .. branch
-					end
-				),
-				subscribe.buf_autocmd(
-					"el-git-changes",
-					"BufWritePost",
-					function(win, buf)
-						local changes = extensions.git_changes(win, buf)
-
-						if changes == nil then
-							return ""
-						end
-
-						return " ✘ " .. changes
-					end
-				),
-
-				sections.split,
-				"%f",
-				" ",
-				function(win, buf)
-					local icon, icon_color =
-						devicons.get_icon_color_by_filetype(buf.extension)
-
-					vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", {
-						fg = icon_color,
-						bg = statusline_bg,
-					})
-
-					local fileicon = sections.highlight({
-						active = "StatusLineFiletypeIcon",
-					}, icon)
-
-					return fileicon(win, buf)
-				end,
-
-				sections.split,
-				function(win, buf)
-					local ff = vim.bo.fileformat
-					local ff_os = vim.uv.os_uname().sysname:lower()
-
-					if ff == "unix" then
-						ff_os = "linux"
-					elseif ff == "dos" then
-						ff_os = "windows"
-					elseif ff == "mac" then
-						ff_os = "apple"
-					end
-
-					local icon_tbl =
-						devicons.get_icons_by_operating_system()[ff_os]
-
-					vim.api.nvim_set_hl(0, "StatusLineFileformatIcon", {
-						fg = icon_tbl.color,
-						bg = statusline_bg,
-					})
-
-					local icon = sections.highlight({
-						active = "StatusLineFileformatIcon",
-					}, icon_tbl.icon)
-
-					return icon(win, buf)
-				end,
-				" ",
-				vim.bo.fileencoding,
-				" ",
-				function(win, buf)
-					local alt_content = ""
-					local percent =
-						eval_statusline(builtin.percentage_through_file, {}).str
-
-					if eval_statusline(line, {}).str == "1  " then
-						alt_content = "[*TOP]"
-					elseif percent == "100" then
-						alt_content = "[*BOT]"
-					end
-
-					if alt_content ~= "" then
-						local alt = sections.highlight({
-							active = "StatusLineFilePercentage",
-						}, alt_content)
-						return alt(win, buf)
-					end
-
-					return "[" .. percent .. "%%]"
-				end,
-				"[",
-				line,
-				":",
-				builtin.column_with_width(2),
-				"]",
-			}
+			return segments
 		end
 
 		return opts
