@@ -2,9 +2,39 @@ return {
 	"nvim-lua/plenary.nvim",
 
 	{
+		"numToStr/Comment.nvim",
+		config = true,
+	},
+
+	{
+		"mbbill/undotree",
+		keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } },
+	},
+
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+	},
+
+	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true,
+	},
+
+	{
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+		config = true,
+	},
+
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = { default_file_explorer = false },
+		keys = { { "<leader>-", "<cmd>Oil<CR>" } },
 	},
 
 	{
@@ -16,17 +46,6 @@ return {
 	},
 
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-
-	{
-		"mbbill/undotree",
-		keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } },
-	},
-
-	{
 		"tpope/vim-fugitive",
 		cmd = { "G", "Git" },
 		keys = {
@@ -34,6 +53,16 @@ return {
 			{ "gh", "<cmd>diffget //2<CR>" },
 			{ "gl", "<cmd>diffget //3<CR>" },
 		},
+	},
+
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
+		cond = vim.fn.executable("make") == 1,
+		build = "make",
+		config = function()
+			require("telescope").load_extension("fzf")
+		end,
 	},
 
 	{
@@ -55,15 +84,5 @@ return {
 			}
 		end,
 		config = true,
-	},
-
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		dependencies = "nvim-telescope/telescope.nvim",
-		cond = vim.fn.executable("make") == 1,
-		build = "make",
-		config = function()
-			require("telescope").load_extension("fzf")
-		end,
 	},
 }

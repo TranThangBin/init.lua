@@ -51,11 +51,9 @@ return {
 				function(win, buf)
 					local branch = extensions.git_branch(win, buf)
 
-					if branch == nil then
-						return ""
+					if branch ~= nil then
+						return "  " .. branch
 					end
-
-					return "  " .. branch
 				end
 			),
 			subscribe.buf_autocmd(
@@ -64,11 +62,9 @@ return {
 				function(win, buf)
 					local changes = extensions.git_changes(win, buf)
 
-					if changes == nil then
-						return ""
+					if changes ~= nil then
+						return " ✘ " .. changes
 					end
-
-					return " ✘ " .. changes
 				end
 			),
 
@@ -76,17 +72,19 @@ return {
 			"%f",
 			" ",
 			function(win, buf)
-				local icon_tbl =
-					devicons.get_icons_by_extension()[buf.extension]
+				local icon, icon_hi_group =
+					devicons.get_icon(vim.fn.expand("%:t"), buf.extension, {})
 
-				vim.api.nvim_set_hl(0, "StatusLineFiletypeIcon", {
-					fg = icon_tbl.color,
+				local icon_color = get_hl(0, { name = icon_hi_group }).fg
+
+				set_hl(0, "StatusLineFiletypeIcon", {
+					fg = icon_color,
 					bg = statusline_bg,
 				})
 
 				local fileicon = sections.highlight({
 					active = "StatusLineFiletypeIcon",
-				}, icon_tbl.icon)
+				}, icon)
 
 				return fileicon(win, buf)
 			end,
