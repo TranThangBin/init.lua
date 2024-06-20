@@ -10,41 +10,22 @@ return {
 		local extensions = require("el.extensions")
 		local sections = require("el.sections")
 		local subscribe = require("el.subscribe")
-		local palete = require("rose-pine.palette")
 		local devicons = require("nvim-web-devicons")
-		local mode_highlights = require("el.data").mode_highlights
 
-		local get_hl = vim.api.nvim_get_hl
-		local set_hl = vim.api.nvim_set_hl
-		local eval_statusline = vim.api.nvim_eval_statusline
+		local segments = {}
 
-		local statusline_bg = palete.base
+		local opts = {
+			generator = function()
+				return segments
+			end,
+		}
 
-		for _, hl_group_name in pairs(mode_highlights) do
-			local hl_group = get_hl(0, { name = hl_group_name })
-			local link_hl_group = get_hl(0, { name = hl_group.link })
+		table.insert(segments, extensions.mode)
 
-			set_hl(
-				0,
-				hl_group_name,
-				{ bg = statusline_bg, fg = link_hl_group.fg }
-			)
-			set_hl(0, hl_group_name .. "Inactive", { link = "StatusLineNC" })
-		end
+		table.insert(segments, " ")
 
-		local precondit_group = get_hl(0, { name = "PreCondit" })
-		set_hl(0, "StatusLineFilePercentage", {
-			fg = precondit_group.fg,
-			bg = statusline_bg,
-		})
-		set_hl(0, "StatusLine", { bg = statusline_bg })
-
-		local opts = {}
-
-		local line = builtin.line_with_width(3)
-
-		local segments = {
-			extensions.mode,
+		table.insert(
+			segments,
 			subscribe.buf_autocmd(
 				"el-git-branch",
 				"BufEnter",
@@ -52,10 +33,16 @@ return {
 					local branch = extensions.git_branch(win, buf)
 
 					if branch ~= nil then
-						return "  " .. branch
+						return " " .. branch
 					end
 				end
-			),
+			)
+		)
+
+		table.insert(segments, " ")
+
+		table.insert(
+			segments,
 			subscribe.buf_autocmd(
 				"el-git-changes",
 				"BufWritePost",
@@ -63,91 +50,81 @@ return {
 					local changes = extensions.git_changes(win, buf)
 
 					if changes ~= nil then
-						return " ✘ " .. changes
+						return "✘ " .. changes
 					end
 				end
-			),
+			)
+		)
 
-			sections.split,
-			"%f",
-			" ",
-			function(win, buf)
-				local icon, icon_hi_group =
-					devicons.get_icon(vim.fn.expand("%:t"), buf.extension, {})
+		table.insert(segments, " ")
 
-				local icon_color = get_hl(0, { name = icon_hi_group }).fg
+		table.insert(segments, require("el.diagnostic").make_buffer())
 
-				set_hl(0, "StatusLineFiletypeIcon", {
-					fg = icon_color,
-					bg = statusline_bg,
-				})
+		table.insert(segments, sections.split)
 
-				local fileicon = sections.highlight({
-					active = "StatusLineFiletypeIcon",
-				}, icon)
+		table.insert(segments, builtin.file_relative)
 
-				return fileicon(win, buf)
-			end,
+		table.insert(segments, " ")
 
-			sections.split,
-			function(win, buf)
-				local ff = vim.bo.fileformat
-				local ff_os = vim.uv.os_uname().sysname:lower()
+		table.insert(segments, function(win, buf)
+			local icon, icon_hi_group =
+				devicons.get_icon(vim.fn.expand("%:t"), buf.extension, {})
 
-				if ff == "unix" then
-					ff_os = "linux"
-				elseif ff == "dos" then
-					ff_os = "windows"
-				elseif ff == "mac" then
-					ff_os = "apple"
-				end
+			local fileicon = sections.highlight({
+				active = icon_hi_group,
+			}, icon)
 
-				local icon_tbl = devicons.get_icons_by_operating_system()[ff_os]
+			return fileicon(win, buf)
+		end)
 
-				vim.api.nvim_set_hl(0, "StatusLineFileformatIcon", {
-					fg = icon_tbl.color,
-					bg = statusline_bg,
-				})
+		table.insert(segments, sections.split)
 
-				local icon = sections.highlight({
-					active = "StatusLineFileformatIcon",
-				}, icon_tbl.icon)
+		table.insert(segments, function(win, buf)
+			local ff = vim.bo.fileformat
+			local ff_os = vim.uv.os_uname().sysname:lower()
 
-				return icon(win, buf)
-			end,
-			" ",
-			vim.bo.fileencoding,
-			" ",
-			function(win, buf)
-				local alt_content = ""
-				local percent =
-					eval_statusline(builtin.percentage_through_file, {}).str
+			if ff == "unix" then
+				ff_os = "linux"
+			elseif ff == "dos" then
+				ff_os = "windows"
+			elseif ff == "mac" then
+				ff_os = "apple"
+			end
 
-				if eval_statusline(line, {}).str == "1  " then
-					alt_content = "[*TOP]"
-				elseif percent == "100" then
-					alt_content = "[*BOT]"
-				end
+			local icon_tbl = devicons.get_icons_by_operating_system()[ff_os]
 
-				if alt_content ~= "" then
-					local alt = sections.highlight({
-						active = "StatusLineFilePercentage",
-					}, alt_content)
-					return alt(win, buf)
-				end
+			vim.api.nvim_set_hl(0, "StatusLineFileformatIcon", {
+				fg = icon_tbl.color,
+			})
 
-				return "[" .. percent .. "%%]"
-			end,
-			"[",
-			line,
-			":",
-			builtin.column_with_width(2),
-			"]",
-		}
+			local icon = sections.highlight({
+				active = "StatusLineFileformatIcon",
+			}, icon_tbl.icon)
 
-		function opts.generator()
-			return segments
-		end
+			return icon(win, buf)
+		end)
+
+		table.insert(segments, " ")
+
+		table.insert(
+			segments,
+			subscribe.buf_autocmd("el-file-encoding", "BufEnter", function()
+				return vim.bo.fileencoding
+			end)
+		)
+
+		table.insert(segments, " ")
+
+		table.insert(segments, "[")
+		table.insert(segments, builtin.percentage_through_file)
+		table.insert(segments, "%%")
+		table.insert(segments, "]")
+
+		table.insert(segments, "[")
+		table.insert(segments, builtin.line_with_width(3))
+		table.insert(segments, ":")
+		table.insert(segments, builtin.column_with_width(2))
+		table.insert(segments, "]")
 
 		return opts
 	end,
