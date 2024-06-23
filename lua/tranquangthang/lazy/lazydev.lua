@@ -6,8 +6,7 @@ return {
 		{ "Bilal2453/luvit-meta", lazy = true },
 	},
 
-	cond = vim.version.ge ~= nil
-		and vim.version.ge(vim.version(), "0.10.0-dev"),
+	cond = vim.fn.has("nvim-0.10.0") == 1,
 
 	ft = "lua",
 
@@ -20,10 +19,8 @@ return {
 			coq = false,
 		},
 		enabled = function(root_dir)
-			return (
-				vim.g.lazydev_enabled == nil and true
-				or vim.g.lazydev_enabled
-			) and not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+			return (vim.g.lazydev_enabled == nil or vim.g.lazydev_enabled)
+				and not vim.uv.fs_stat(root_dir .. "/.luarc.json")
 		end,
 	},
 }

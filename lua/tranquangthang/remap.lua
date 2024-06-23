@@ -14,7 +14,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- x = visual, v = visual and select
 vim.keymap.set({ "n", "x" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "x" }, "<leader>Y", '"+Y')
 vim.keymap.set("x", "<leader>d", '"_d')
@@ -35,7 +34,6 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader><leader>", "<cmd>so<CR>")
 
--- nice
 vim.keymap.set("n", "<leader>e", function()
 	local file_pattern = "^"
 		.. vim.fn.escape(vim.fn.expand("%:t"), "\\/.*~")
