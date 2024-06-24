@@ -74,13 +74,13 @@ return {
 		},
 		lazy = false,
 		keys = function()
-			local todo = require("todo-comments")
+			local todo_jump = require("todo-comments.jump")
 
 			return {
 				{ "ttf", "<cmd>TodoTelescope<CR>" },
 				{ "txx", "<cmd>TodoTrouble<CR>" },
-				{ "]t", todo.jump_next },
-				{ "[t", todo.jump_prev },
+				{ "]t", todo_jump.next },
+				{ "[t", todo_jump.prev },
 			}
 		end,
 		config = true,
