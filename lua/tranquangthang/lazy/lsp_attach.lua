@@ -8,7 +8,7 @@ return {
 
 	opts = {
 		ui = {
-			border = "single",
+			border = "rounded",
 			height = nil,
 			width = nil,
 			wrap = true,

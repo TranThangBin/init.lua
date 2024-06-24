@@ -11,7 +11,7 @@ return {
 	},
 
 	config = function()
-		require("lspconfig.ui.windows").default_options.border = "single"
+		require("lspconfig.ui.windows").default_options.border = "rounded"
 
 		local lsp_zero = require("lsp-zero")
 		local lspconfig = require("lspconfig")
@@ -19,7 +19,7 @@ return {
 
 		require("mason").setup({
 			ui = {
-				border = "single",
+				border = "rounded",
 
 				icons = {
 					package_installed = "✓",

@@ -16,7 +16,7 @@ require("lazy").setup("tranquangthang.lazy", {
 	ui = {
 		size = { width = 0.8, height = 0.8 },
 		wrap = true,
-		border = "single",
+		border = "rounded",
 		backdrop = 60,
 		title = nil,
 		title_pos = "center",
