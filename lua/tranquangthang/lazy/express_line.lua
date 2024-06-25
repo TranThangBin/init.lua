@@ -64,15 +64,9 @@ return {
 
 		table.insert(segments, builtin.modified)
 
-		table.insert(segments, " ")
-
 		table.insert(segments, builtin.readonly)
 
-		table.insert(segments, " ")
-
 		table.insert(segments, builtin.help)
-
-		table.insert(segments, " ")
 
 		table.insert(segments, builtin.preview)
 

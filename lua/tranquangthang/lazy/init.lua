@@ -1,6 +1,8 @@
 return {
 	"nvim-lua/plenary.nvim",
 
+	"nvim-tree/nvim-web-devicons",
+
 	{
 		"numToStr/Comment.nvim",
 		config = true,
@@ -9,6 +11,12 @@ return {
 	{
 		"mbbill/undotree",
 		keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } },
+	},
+
+	{
+		"prichrd/netrw.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		opts = {},
 	},
 
 	{

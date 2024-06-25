@@ -155,20 +155,62 @@ return {
 
 	cmd = "Trouble",
 
-	keys = {
-		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>" },
+	keys = function()
+		local trouble = require("trouble")
 
-		{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>" },
+		return {
+			{
+				"<leader>xx",
+				function()
+					trouble.toggle("diagnostics")
+				end,
+			},
 
-		{ "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>" },
+			{
+				"<leader>xX",
+				function()
+					trouble.toggle({
+						mode = "diagnostics",
+						filter = {
+							buf = 0,
+						},
+					})
+				end,
+			},
 
-		{
-			"<leader>cl",
-			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-		},
+			{
+				"<leader>cs",
+				function()
+					trouble.toggle({ mode = "symbols", focus = false })
+				end,
+			},
 
-		{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>" },
+			{
+				"<leader>cl",
+				function()
+					trouble.toggle({
+						mode = "lsp",
+						focus = false,
+						win = {
+							position = "right",
+						},
+					})
+				end,
+			},
 
-		{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>" },
-	},
+			{
+				"<leader>xL",
+				function()
+					trouble.toggle({ mode = "loclist" })
+				end,
+			},
+
+			{
+				"<leader>xQ",
+				function()
+					trouble.toggle({ mode = "qflist" })
+				end,
+			},
+		}
+	end,
 }
