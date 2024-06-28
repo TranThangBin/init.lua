@@ -3,7 +3,7 @@ return {
 
 	dir = "~/personal/nvim/express_line.nvim",
 
-	dependencies = { "nvim-tree/nvim-web-devicons", "rose-pine" },
+	dependencies = "nvim-tree/nvim-web-devicons",
 
 	opts = function()
 		local builtin = require("el.builtin")
@@ -12,17 +12,7 @@ return {
 		local subscribe = require("el.subscribe")
 		local devicons = require("nvim-web-devicons")
 
-		local stl_base_bg = require("rose-pine.palette").base
-		local get_hl = vim.api.nvim_get_hl
 		local set_hl = vim.api.nvim_set_hl
-
-		set_hl(0, "StatusLine", { bg = stl_base_bg })
-
-		for _, hi_group in pairs(require("el.data").mode_highlights) do
-			local hl_group = get_hl(0, { name = hi_group, link = false })
-			set_hl(0, hi_group, { fg = hl_group.fg, bg = stl_base_bg })
-			set_hl(0, hi_group .. "Inactive", { link = "StatusLineNC" })
-		end
 
 		local segments = {}
 
@@ -34,7 +24,7 @@ return {
 
 		table.insert(
 			segments,
-			extensions.gen_mode({ format_string = " %s " })
+			extensions.gen_mode({ format_string = " %s " })
 		)
 
 		table.insert(segments, " ")
@@ -45,22 +35,16 @@ return {
 
 		table.insert(segments, function(win, buf)
 			local icon, icon_hi_group =
-				devicons.get_icon(vim.fn.expand("%:t"), buf.extension, {})
-
-			local icon_hl = get_hl(0, { name = icon_hi_group })
-
-			icon_hi_group = "StatusLineFileTypeIcon"
-
-			set_hl(0, icon_hi_group, { fg = icon_hl.fg, bg = stl_base_bg })
+				devicons.get_icon(buf.name, buf.extension, {})
 
 			local fileicon = sections.highlight({
 				active = icon_hi_group,
-			}, icon)
+			}, icon .. " ")
 
 			return fileicon(win, buf)
 		end)
 
-		table.insert(segments, "  ")
+		table.insert(segments, " ")
 
 		table.insert(segments, builtin.modified)
 
@@ -128,7 +112,7 @@ return {
 
 			local ff_hi_group = "StatusLineFileFormatIcon"
 
-			set_hl(0, ff_hi_group, { fg = icon_tbl.color, bg = stl_base_bg })
+			set_hl(0, ff_hi_group, { fg = icon_tbl.color })
 
 			local icon = sections.highlight({
 				active = ff_hi_group,

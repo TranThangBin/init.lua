@@ -21,6 +21,13 @@ return {
 			offset_x = 0,
 			offset_y = 0,
 			floating_window_above_cur_line = false,
+			silent = true,
+			highlight = {
+				italic = true,
+				bold = true,
+				fg = "#ffffff",
+				...,
+			},
 		},
 		keymaps = {
 			next_signature = "<C-j>",

@@ -24,6 +24,7 @@ return {
 							disabled_filetypes = {
 								"typescript",
 								"javascript",
+								"json",
 							},
 						})
 					)
