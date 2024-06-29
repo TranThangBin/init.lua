@@ -33,16 +33,13 @@ return {
 
 		table.insert(segments, " ")
 
-		table.insert(segments, function(win, buf)
-			local icon, icon_hi_group =
-				devicons.get_icon(buf.name, buf.extension, {})
-
-			local fileicon = sections.highlight({
-				active = icon_hi_group,
-			}, icon .. " ")
-
-			return fileicon(win, buf)
-		end)
+		table.insert(
+			segments,
+			extensions.file_icon({
+				format_string = "%s ",
+				color_icon = true,
+			})
+		)
 
 		table.insert(segments, " ")
 
@@ -86,15 +83,16 @@ return {
 					local branch = extensions.git_branch(win, buf)
 
 					if branch ~= nil then
-						return " " .. branch .. " "
+						branch = sections.highlight({
+							active = "String",
+						}, " " .. branch .. " ")
+						return branch(win, buf)
 					end
 				end
 			)
 		)
 
 		table.insert(segments, " ")
-
-		table.insert(segments, " ")
 
 		table.insert(segments, function(win, buf)
 			local ff = vim.bo.fileformat
@@ -116,9 +114,9 @@ return {
 
 			local icon = sections.highlight({
 				active = ff_hi_group,
-			}, icon_tbl.icon)
+			}, string.format(" %s %s", ff, icon_tbl.icon))
 
-			return ff .. " " .. icon(win, buf)
+			return icon(win, buf)
 		end)
 
 		table.insert(segments, "  ")
