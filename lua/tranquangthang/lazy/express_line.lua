@@ -95,7 +95,7 @@ return {
 		table.insert(segments, " ")
 
 		table.insert(segments, function(win, buf)
-			local ff = vim.bo.fileformat
+			local ff = buf.fileformat
 			local ff_os = vim.uv.os_uname().sysname:lower()
 
 			if ff == "unix" then
@@ -112,11 +112,11 @@ return {
 
 			set_hl(0, ff_hi_group, { fg = icon_tbl.color })
 
-			local icon = sections.highlight({
+			local fileformat = sections.highlight({
 				active = ff_hi_group,
 			}, string.format(" %s %s", ff, icon_tbl.icon))
 
-			return icon(win, buf)
+			return fileformat(win, buf)
 		end)
 
 		table.insert(segments, "  ")

@@ -40,7 +40,7 @@ return {
 	},
 
 	config = function(_, opts)
-		require("lsp-zero").on_attach(function(client, bufnr)
+		require("lsp-zero.api").on_attach(function(client, bufnr)
 			local function map(mode, lhs, rhs, remap_opts)
 				remap_opts = remap_opts or {}
 				remap_opts.buffer = bufnr

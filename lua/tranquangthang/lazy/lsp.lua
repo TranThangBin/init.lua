@@ -13,7 +13,7 @@ return {
 	config = function()
 		require("lspconfig.ui.windows").default_options.border = "rounded"
 
-		local lsp_zero = require("lsp-zero")
+		local lsp_zero = require("lsp-zero.api")
 		local lspconfig = require("lspconfig")
 		local schemastore = require("schemastore")
 

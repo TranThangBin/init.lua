@@ -16,14 +16,14 @@ return {
 	},
 
 	opts = function()
-		local lsp_zero = require("lsp-zero")
+		local lsp_zero_cmp = require("lsp-zero.cmp")
 
 		local cmp = require("cmp")
-		local cmp_action = lsp_zero.cmp_action()
+		local cmp_action = lsp_zero_cmp.action()
 
 		return {
 			preselect = "item",
-			formatting = lsp_zero.cmp_format({ details = true }),
+			formatting = lsp_zero_cmp.format({ details = true }),
 
 			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -90,14 +90,6 @@ return {
 			}, {
 				{ name = "cmdline" },
 			}),
-			matching = {
-				disallow_symbol_nonprefix_matching = false,
-				disallow_fuzzy_matching = false,
-				disallow_prefix_unmatching = false,
-				disallow_partial_matching = false,
-				disallow_fullfuzzy_matching = false,
-				disallow_partial_fuzzy_matching = false,
-			},
 		})
 	end,
 }
