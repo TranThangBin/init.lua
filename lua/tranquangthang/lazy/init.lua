@@ -4,6 +4,8 @@ table.insert(M, "nvim-lua/plenary.nvim")
 
 table.insert(M, "nvim-tree/nvim-web-devicons")
 
+table.insert(M, "tpope/vim-obsession")
+
 table.insert(M, {
 	"numToStr/Comment.nvim",
 	config = true,
