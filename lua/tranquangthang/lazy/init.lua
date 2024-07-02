@@ -70,7 +70,7 @@ table.insert(M, {
 	cond = vim.fn.executable("make") == 1,
 	build = "make",
 	config = function()
-		require("telescope").load_extension("fzf")
+		require("telescope._extensions").load("fzf")
 	end,
 })
 
@@ -86,13 +86,26 @@ table.insert(M, {
 		local todo_jump = require("todo-comments.jump")
 
 		return {
-			{ "ttf", "<cmd>TodoTelescope<CR>" },
-			{ "txx", "<cmd>TodoTrouble<CR>" },
+			{
+				"ttf",
+				function()
+					require("telescope.command").load_command("todo-comments")
+				end,
+			},
+			{
+				"txx",
+				function()
+					require("trouble").toggle("todo")
+				end,
+			},
 			{ "]t", todo_jump.next },
 			{ "[t", todo_jump.prev },
 		}
 	end,
-	config = true,
+	config = function()
+		require("todo-comments").setup()
+		require("telescope._extensions").load("todo-comments")
+	end,
 })
 
 return M
