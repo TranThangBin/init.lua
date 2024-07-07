@@ -76,11 +76,7 @@ return {
 
 			if client.supports_method("signatureHelpProvider") then
 				require("lsp-overloads").setup(client, opts)
-				vim.keymap.set(
-					{ "n", "i" },
-					"<A-s>",
-					vim.cmd.LspOverloadsSignature
-				)
+				map({ "n", "i" }, "<A-s>", vim.cmd.LspOverloadsSignature)
 			end
 		end)
 	end,
