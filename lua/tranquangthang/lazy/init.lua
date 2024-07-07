@@ -78,35 +78,17 @@ table.insert(M, {
 
 table.insert(M, {
 	"folke/todo-comments.nvim",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
-		"folke/trouble.nvim",
-	},
+	dependencies = "nvim-lua/plenary.nvim",
 	lazy = false,
+	config = true,
 	keys = function()
-		local todo_jump = require("todo-comments.jump")
-
+		local jump = require("todo-comments.jump")
 		return {
-			{
-				"ttf",
-				function()
-					require("telescope.command").load_command("todo-comments")
-				end,
-			},
-			{
-				"txx",
-				function()
-					require("trouble").toggle("todo")
-				end,
-			},
-			{ "]t", todo_jump.next },
-			{ "[t", todo_jump.prev },
+			{ "<leader>ttf", "<cmd>TodoTelescope<CR>" },
+			{ "<leader>txx", "<cmd>TodoTrouble<CR>" },
+			{ "]t", jump.next },
+			{ "[t", jump.prev },
 		}
-	end,
-	config = function()
-		require("todo-comments").setup()
-		require("telescope._extensions").load("todo-comments")
 	end,
 })
 
