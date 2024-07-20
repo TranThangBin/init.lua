@@ -40,7 +40,7 @@ return {
 	},
 
 	config = function(_, opts)
-		require("lsp-zero.api").on_attach(function(client, bufnr)
+		require("lsp-zero").on_attach(function(client, bufnr)
 			local function map(mode, lhs, rhs, remap_opts)
 				remap_opts = remap_opts or {}
 				remap_opts.buffer = bufnr
@@ -71,7 +71,12 @@ return {
 			map("n", "<leader>rn", vim.lsp.buf.rename)
 
 			map("n", "<leader>f", function()
-				vim.lsp.buf.format({ async = true })
+				vim.lsp.buf.format({
+					async = true,
+					filter = function(cl)
+						return cl.name == "null-ls"
+					end,
+				})
 			end)
 
 			if client.supports_method("signatureHelpProvider") then

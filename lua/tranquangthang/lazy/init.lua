@@ -72,7 +72,7 @@ table.insert(M, {
 	cond = vim.fn.executable("make") == 1,
 	build = "make",
 	config = function()
-		require("telescope._extensions").load("fzf")
+		require("telescope").load_extension("fzf")
 	end,
 })
 

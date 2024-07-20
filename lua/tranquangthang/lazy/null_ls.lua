@@ -7,14 +7,13 @@ return {
 		"williamboman/mason.nvim",
 		{
 			"nvimtools/none-ls.nvim",
-			opts = { border = "single" },
+			opts = { border = "rounded" },
 			config = true,
 		},
 	},
 
 	opts = function()
 		local null_ls = require("null-ls")
-
 		return {
 			ensure_installed = { "stylua" },
 			handlers = {

@@ -16,14 +16,14 @@ return {
 	},
 
 	opts = function()
-		local lsp_zero_cmp = require("lsp-zero.cmp")
+		local lsp_zero = require("lsp-zero")
 
 		local cmp = require("cmp")
-		local cmp_action = lsp_zero_cmp.action()
+		local cmp_action = lsp_zero.cmp_action()
 
 		return {
 			preselect = "item",
-			formatting = lsp_zero_cmp.format({ details = true }),
+			formatting = lsp_zero.cmp_format({ details = true }),
 
 			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({ select = false }),

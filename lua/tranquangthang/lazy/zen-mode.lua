@@ -6,7 +6,6 @@ return {
 		local rnu = vim.wo.rnu
 		local colorcolumn = vim.opt.colorcolumn
 		local zen_group = vim.api.nvim_create_augroup("zen", {})
-
 		return {
 			window = {
 				backdrop = 0.95,
@@ -48,7 +47,6 @@ return {
 						end,
 					}
 				)
-
 				vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
 					group = zen_group,
 					callback = function()
@@ -60,7 +58,6 @@ return {
 			end,
 			on_close = function()
 				vim.api.nvim_clear_autocmds({ group = zen_group })
-
 				if vim.bo.filetype ~= "netrw" then
 					vim.wo.number = number
 					vim.wo.rnu = rnu
@@ -72,10 +69,8 @@ return {
 
 	keys = function()
 		local zen_mode = require("zen-mode")
-
 		return {
 			{ "<leader>zz", zen_mode.toggle },
-
 			{
 				"<leader>zZ",
 				function()
@@ -89,6 +84,7 @@ return {
 								cursorline = false,
 								cursorcolumn = false,
 								foldcolumn = "0",
+								colorcolumn = "0",
 								list = false,
 							},
 						},
