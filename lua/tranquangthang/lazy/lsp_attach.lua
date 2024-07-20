@@ -70,11 +70,14 @@ return {
 
 			map("n", "<leader>rn", vim.lsp.buf.rename)
 
+			local null_ls =
+				vim.lsp.get_clients({ name = "null-ls", bufnr = bufnr })[1]
+
 			map("n", "<leader>f", function()
 				vim.lsp.buf.format({
 					async = true,
 					filter = function(cl)
-						return cl.name == "null-ls"
+						return null_ls == nil or cl.name == "null-ls"
 					end,
 				})
 			end)
