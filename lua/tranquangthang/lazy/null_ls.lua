@@ -28,7 +28,6 @@ return {
 						})
 					)
 				end,
-
 				templ = function()
 					null_ls.register({
 						method = null_ls.methods.FORMATTING,

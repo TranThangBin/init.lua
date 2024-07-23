@@ -1,3 +1,11 @@
+local function default_filter()
+	return true
+end
+
+local function null_ls_filter(client)
+	return client.name == "null-ls"
+end
+
 return {
 	"Issafalcon/lsp-overloads.nvim",
 
@@ -70,16 +78,23 @@ return {
 
 			map("n", "<leader>rn", vim.lsp.buf.rename)
 
-			local null_ls =
-				vim.lsp.get_clients({ name = "null-ls", bufnr = bufnr })[1]
+			local format_opts = { async = true }
 
 			map("n", "<leader>f", function()
-				vim.lsp.buf.format({
-					async = true,
-					filter = function(cl)
-						return null_ls == nil or cl.name == "null-ls"
-					end,
-				})
+				if format_opts.filter == nil then
+					local null_ls = vim.lsp.get_clients({
+						name = "null-ls",
+						bufnr = bufnr,
+					})[1]
+
+					if null_ls == nil then
+						format_opts.filter = default_filter
+					else
+						format_opts.filter = null_ls_filter
+					end
+				end
+
+				vim.lsp.buf.format(format_opts)
 			end)
 
 			if client.supports_method("signatureHelpProvider") then
